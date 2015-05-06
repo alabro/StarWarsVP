@@ -12,9 +12,26 @@ namespace StarWarsVP
 {
     public partial class Form1 : Form
     {
+        private Scene Scene;
+
         public Form1()
         {
             InitializeComponent();
         }
+
+
+        public void ToggleViews()
+        {
+            btnNewGame.Visible = !btnNewGame.Visible;
+            btnHighScores.Visible = !btnHighScores.Visible;
+            btnExit.Visible = !btnExit.Visible;
+        }
+
     }
+
+
+    
+
+
+
 }
