@@ -130,14 +130,14 @@
             this.pnlMainMenu.Controls.Add(this.pnlHighScores);
             this.pnlMainMenu.Location = new System.Drawing.Point(14, 12);
             this.pnlMainMenu.Name = "pnlMainMenu";
-            this.pnlMainMenu.Size = new System.Drawing.Size(357, 499);
+            this.pnlMainMenu.Size = new System.Drawing.Size(358, 499);
             this.pnlMainMenu.TabIndex = 7;
             // 
             // pnlScene
             // 
-            this.pnlScene.Location = new System.Drawing.Point(2, 22);
+            this.pnlScene.Location = new System.Drawing.Point(-16, 0);
             this.pnlScene.Name = "pnlScene";
-            this.pnlScene.Size = new System.Drawing.Size(354, 474);
+            this.pnlScene.Size = new System.Drawing.Size(390, 498);
             this.pnlScene.TabIndex = 4;
             this.pnlScene.Visible = false;
             // 

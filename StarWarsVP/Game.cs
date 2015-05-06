@@ -17,8 +17,10 @@ namespace StarWarsVP
         public Game()
         {
             InitializeComponent();
-            Scene = new Scene(pnlScene.Width, pnlScene.Height);
             this.DoubleBuffered = true;
+            Scene = new Scene(pnlScene.DisplayRectangle);
+
+
         }
 
 
