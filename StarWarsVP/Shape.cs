@@ -25,7 +25,7 @@ namespace StarWarsVP
             Hit = false;
         }
 
-        public abstract void Move();
+        public abstract void Move(Direction direction);
 
         public abstract void Draw(Graphics g);
 

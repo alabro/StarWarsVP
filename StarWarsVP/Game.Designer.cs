@@ -36,9 +36,10 @@
             this.btnSound = new System.Windows.Forms.Button();
             this.pnlOptions = new System.Windows.Forms.Panel();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
-            this.pnlScene = new System.Windows.Forms.Panel();
             this.pnlHighScores = new System.Windows.Forms.Panel();
+            this.pnlScene = new StarWarsVP.Game.PanelDoubleBuffered();
             this.pnlScore = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
@@ -126,20 +127,11 @@
             this.pnlMainMenu.Controls.Add(this.btnExit);
             this.pnlMainMenu.Controls.Add(this.btnNewGame);
             this.pnlMainMenu.Controls.Add(this.btnHighScores);
-            this.pnlMainMenu.Controls.Add(this.pnlScene);
             this.pnlMainMenu.Controls.Add(this.pnlHighScores);
             this.pnlMainMenu.Location = new System.Drawing.Point(14, 12);
             this.pnlMainMenu.Name = "pnlMainMenu";
             this.pnlMainMenu.Size = new System.Drawing.Size(358, 499);
             this.pnlMainMenu.TabIndex = 7;
-            // 
-            // pnlScene
-            // 
-            this.pnlScene.Location = new System.Drawing.Point(-16, 0);
-            this.pnlScene.Name = "pnlScene";
-            this.pnlScene.Size = new System.Drawing.Size(390, 498);
-            this.pnlScene.TabIndex = 4;
-            this.pnlScene.Visible = false;
             // 
             // pnlHighScores
             // 
@@ -149,16 +141,36 @@
             this.pnlHighScores.TabIndex = 5;
             this.pnlHighScores.Visible = false;
             // 
+            // pnlScene
+            // 
+            this.pnlScene.BackColor = System.Drawing.Color.Transparent;
+            this.pnlScene.Location = new System.Drawing.Point(-8, 23);
+            this.pnlScene.Name = "pnlScene";
+            this.pnlScene.Size = new System.Drawing.Size(400, 498);
+            this.pnlScene.TabIndex = 4;
+            this.pnlScene.Visible = false;
+            this.pnlScene.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlScene_Paint);
+            // 
             // pnlScore
             // 
             this.pnlScore.BackColor = System.Drawing.Color.Gold;
             this.pnlScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlScore.Controls.Add(this.lblTime);
             this.pnlScore.Controls.Add(this.lblTitle);
             this.pnlScore.Location = new System.Drawing.Point(-8, -1);
             this.pnlScore.Name = "pnlScore";
             this.pnlScore.Size = new System.Drawing.Size(400, 29);
             this.pnlScore.TabIndex = 7;
             this.pnlScore.Visible = false;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(346, 4);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(34, 13);
+            this.lblTime.TabIndex = 1;
+            this.lblTime.Text = "00:00";
             // 
             // lblTitle
             // 
@@ -175,14 +187,17 @@
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.BackgroundImage = global::StarWarsVP.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(384, 561);
-            this.Controls.Add(this.pnlScore);
             this.Controls.Add(this.pnlOptions);
+            this.Controls.Add(this.pnlScore);
             this.Controls.Add(this.pnlMainMenu);
+            this.Controls.Add(this.pnlScene);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 600);
             this.MinimumSize = new System.Drawing.Size(400, 600);
             this.Name = "Game";
             this.Text = "StarWars";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Game_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.pnlOptions.ResumeLayout(false);
             this.pnlMainMenu.ResumeLayout(false);
@@ -203,9 +218,20 @@
         private System.Windows.Forms.Panel pnlOptions;
         private System.Windows.Forms.Panel pnlMainMenu;
         private System.Windows.Forms.Panel pnlScore;
-        private System.Windows.Forms.Panel pnlScene;
         private System.Windows.Forms.Panel pnlHighScores;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblTime;
+        private Game.PanelDoubleBuffered pnlScene;
+    
+        public class PanelDoubleBuffered : System.Windows.Forms.Panel
+        {
+            public PanelDoubleBuffered()
+                : base()
+            {
+                this.DoubleBuffered = true;
+            }
+        }
     }
+
 }
 

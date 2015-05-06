@@ -13,14 +13,33 @@ namespace StarWarsVP
     public partial class Game : Form
     {
         private Scene Scene;
+        Timer timer;
+        int time;
+        static readonly int TIMER_INTERVAL = 40;
 
         public Game()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+        }
+
+        public void NewGame()
+        {
+            lblTime.Text = "00:00";
+            time = 0;
             Scene = new Scene(pnlScene.DisplayRectangle);
+            timer = new Timer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = TIMER_INTERVAL;
+            timer.Start();
+        }
 
-
+        void timer_Tick(object sender, EventArgs e)
+        {
+            time++;
+            lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
+            Scene.Update();
+            pnlScene.Invalidate();
         }
 
 
@@ -33,8 +52,9 @@ namespace StarWarsVP
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            ToggleViews();
             pnlScene.Visible = true;
+            ToggleViews();
+            NewGame();
         }
 
         private void btnHighScores_Click(object sender, EventArgs e)
@@ -52,6 +72,7 @@ namespace StarWarsVP
         {
             //TODO SAVE SCORE
             ToggleViews();
+            timer.Stop();
             pnlScene.Visible = false;
             pnlHighScores.Visible = false;
         }
@@ -60,6 +81,37 @@ namespace StarWarsVP
         {
             //todo toggle sound
         }
+
+        private void Game_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Scene != null)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        Scene.Move(Direction.LEFT);
+                        break;
+
+                    case Keys.Right:
+                        Scene.Move(Direction.RIGHT);
+                        break;
+                }
+
+                if (e.KeyCode == Keys.D)
+                {
+                    Scene.Shoot();
+                }
+            }
+            
+        }
+
+        private void pnlScene_Paint(object sender, PaintEventArgs e)
+        {
+            Scene.Draw(e.Graphics);
+        }
+
+        
+        
 
     }
 

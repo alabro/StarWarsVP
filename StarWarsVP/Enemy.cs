@@ -15,7 +15,7 @@ namespace StarWarsVP
 
         }
 
-        public override void Move()
+        public override void Move(Direction direction)
         {
 
         }
