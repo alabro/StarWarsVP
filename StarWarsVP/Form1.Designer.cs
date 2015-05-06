@@ -38,6 +38,7 @@
             this.pnlMainMenu = new System.Windows.Forms.Panel();
             this.pnlScore = new System.Windows.Forms.Panel();
             this.pnlScene = new System.Windows.Forms.Panel();
+            this.pnlHighScores = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
@@ -124,6 +125,7 @@
             this.pnlMainMenu.Controls.Add(this.btnNewGame);
             this.pnlMainMenu.Controls.Add(this.btnHighScores);
             this.pnlMainMenu.Controls.Add(this.pnlScene);
+            this.pnlMainMenu.Controls.Add(this.pnlHighScores);
             this.pnlMainMenu.Location = new System.Drawing.Point(14, 12);
             this.pnlMainMenu.Name = "pnlMainMenu";
             this.pnlMainMenu.Size = new System.Drawing.Size(357, 499);
@@ -141,11 +143,19 @@
             // 
             // pnlScene
             // 
-            this.pnlScene.Location = new System.Drawing.Point(3, 22);
+            this.pnlScene.Location = new System.Drawing.Point(1, 22);
             this.pnlScene.Name = "pnlScene";
             this.pnlScene.Size = new System.Drawing.Size(354, 474);
             this.pnlScene.TabIndex = 4;
             this.pnlScene.Visible = false;
+            // 
+            // pnlHighScores
+            // 
+            this.pnlHighScores.Location = new System.Drawing.Point(0, 22);
+            this.pnlHighScores.Name = "pnlHighScores";
+            this.pnlHighScores.Size = new System.Drawing.Size(354, 474);
+            this.pnlHighScores.TabIndex = 5;
+            this.pnlHighScores.Visible = false;
             // 
             // Form1
             // 
@@ -181,6 +191,7 @@
         private System.Windows.Forms.Panel pnlMainMenu;
         private System.Windows.Forms.Panel pnlScore;
         private System.Windows.Forms.Panel pnlScene;
+        private System.Windows.Forms.Panel pnlHighScores;
     }
 }
 

@@ -31,11 +31,13 @@ namespace StarWarsVP
         private void btnNewGame_Click(object sender, EventArgs e)
         {
             ToggleViews();
+            pnlScene.Visible = true;
         }
 
         private void btnHighScores_Click(object sender, EventArgs e)
         {
             ToggleViews();
+            pnlHighScores.Visible = true;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -47,6 +49,8 @@ namespace StarWarsVP
         {
             //TODO SAVE SCORE
             ToggleViews();
+            pnlScene.Visible = false;
+            pnlHighScores.Visible = false;
         }
 
         private void btnSound_Click(object sender, EventArgs e)
