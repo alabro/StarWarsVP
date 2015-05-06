@@ -17,14 +17,41 @@ namespace StarWarsVP
         public Form1()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
 
         public void ToggleViews()
         {
-            btnNewGame.Visible = !btnNewGame.Visible;
-            btnHighScores.Visible = !btnHighScores.Visible;
-            btnExit.Visible = !btnExit.Visible;
+            pnlMainMenu.Visible = !pnlMainMenu.Visible;
+            pnlOptions.Visible = !pnlOptions.Visible;
+            pnlScore.Visible = !pnlScore.Visible;
+        }
+
+        private void btnNewGame_Click(object sender, EventArgs e)
+        {
+            ToggleViews();
+        }
+
+        private void btnHighScores_Click(object sender, EventArgs e)
+        {
+            ToggleViews();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            //TODO SAVE SCORE
+            ToggleViews();
+        }
+
+        private void btnSound_Click(object sender, EventArgs e)
+        {
+            //todo toggle sound
         }
 
     }
