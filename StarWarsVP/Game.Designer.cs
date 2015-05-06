@@ -1,6 +1,6 @@
 ﻿namespace StarWarsVP
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
@@ -36,12 +36,14 @@
             this.btnSound = new System.Windows.Forms.Button();
             this.pnlOptions = new System.Windows.Forms.Panel();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
-            this.pnlScore = new System.Windows.Forms.Panel();
             this.pnlScene = new System.Windows.Forms.Panel();
             this.pnlHighScores = new System.Windows.Forms.Panel();
+            this.pnlScore = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
+            this.pnlScore.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbLogo
@@ -107,7 +109,7 @@
             // 
             // pnlOptions
             // 
-            this.pnlOptions.BackColor = System.Drawing.Color.Yellow;
+            this.pnlOptions.BackColor = System.Drawing.Color.Gold;
             this.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlOptions.Controls.Add(this.btnBack);
             this.pnlOptions.Controls.Add(this.btnSound);
@@ -131,19 +133,9 @@
             this.pnlMainMenu.Size = new System.Drawing.Size(357, 499);
             this.pnlMainMenu.TabIndex = 7;
             // 
-            // pnlScore
-            // 
-            this.pnlScore.BackColor = System.Drawing.Color.Yellow;
-            this.pnlScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlScore.Location = new System.Drawing.Point(-8, -1);
-            this.pnlScore.Name = "pnlScore";
-            this.pnlScore.Size = new System.Drawing.Size(400, 29);
-            this.pnlScore.TabIndex = 7;
-            this.pnlScore.Visible = false;
-            // 
             // pnlScene
             // 
-            this.pnlScene.Location = new System.Drawing.Point(1, 22);
+            this.pnlScene.Location = new System.Drawing.Point(2, 22);
             this.pnlScene.Name = "pnlScene";
             this.pnlScene.Size = new System.Drawing.Size(354, 474);
             this.pnlScene.TabIndex = 4;
@@ -157,7 +149,26 @@
             this.pnlHighScores.TabIndex = 5;
             this.pnlHighScores.Visible = false;
             // 
-            // Form1
+            // pnlScore
+            // 
+            this.pnlScore.BackColor = System.Drawing.Color.Gold;
+            this.pnlScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlScore.Controls.Add(this.lblTitle);
+            this.pnlScore.Location = new System.Drawing.Point(-8, -1);
+            this.pnlScore.Name = "pnlScore";
+            this.pnlScore.Size = new System.Drawing.Size(400, 29);
+            this.pnlScore.TabIndex = 7;
+            this.pnlScore.Visible = false;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Location = new System.Drawing.Point(19, 4);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(0, 13);
+            this.lblTitle.TabIndex = 0;
+            // 
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,11 +181,13 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 600);
             this.MinimumSize = new System.Drawing.Size(400, 600);
-            this.Name = "Form1";
+            this.Name = "Game";
             this.Text = "StarWars";
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.pnlOptions.ResumeLayout(false);
             this.pnlMainMenu.ResumeLayout(false);
+            this.pnlScore.ResumeLayout(false);
+            this.pnlScore.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -192,6 +205,7 @@
         private System.Windows.Forms.Panel pnlScore;
         private System.Windows.Forms.Panel pnlScene;
         private System.Windows.Forms.Panel pnlHighScores;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
 

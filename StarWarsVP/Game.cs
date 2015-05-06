@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace StarWarsVP
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
         private Scene Scene;
 
-        public Form1()
+        public Game()
         {
             InitializeComponent();
+            Scene = new Scene(pnlScene.Width, pnlScene.Height);
             this.DoubleBuffered = true;
         }
 
