@@ -15,7 +15,7 @@ namespace StarWarsVP
             : base(position)
         {
             random = new Random();
-            VelocityY = random.Next(4,10);
+            VelocityY = random.Next(4,6);
             Dir = random.Next() % 2 == 0 ? 1 : -1;
         }
 
@@ -28,7 +28,7 @@ namespace StarWarsVP
                 Dir = -Dir;
             }
 
-            if (Position.X - VelocityX*Dir <= Scene.Bounds.Left+20)
+            if (Position.X - VelocityX*Dir <= Scene.Bounds.Left + 40)
             {
                 Dir = -Dir;
             }
@@ -38,7 +38,11 @@ namespace StarWarsVP
                 Dir = -Dir;
             }
 
-            Position = new Point(Position.X + VelocityX*Dir, Position.Y + VelocityY);
+            if (Position.X + VelocityX * Dir >= Scene.Bounds.Left || Position.X + VelocityX * Dir <= Scene.Bounds.Right)
+            {
+                Position = new Point(Position.X + VelocityX*Dir, Position.Y + VelocityY);
+            }
+            Position = new Point(Position.X, Position.Y + VelocityY);
         }
 
         public override void Draw(Graphics g)
