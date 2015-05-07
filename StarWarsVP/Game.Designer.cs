@@ -146,6 +146,7 @@
             this.pnlScene.BackColor = System.Drawing.Color.Transparent;
             this.pnlScene.Location = new System.Drawing.Point(-8, 23);
             this.pnlScene.Name = "pnlScene";
+            this.pnlScene.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlScene.Size = new System.Drawing.Size(400, 498);
             this.pnlScene.TabIndex = 4;
             this.pnlScene.Visible = false;

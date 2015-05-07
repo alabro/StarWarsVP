@@ -9,16 +9,14 @@ namespace StarWarsVP
     public class Enemy : Shape
     {
         private Random random;
-        private int change;
         private int Dir;
 
         public Enemy(Point position)
             : base(position)
         {
-            VelocityY = 10;
             random = new Random();
+            VelocityY = random.Next(4,10);
             Dir = random.Next() % 2 == 0 ? 1 : -1;
-            change = 0;
         }
 
         public override void Move(Direction direction)
@@ -39,8 +37,6 @@ namespace StarWarsVP
             {
                 Dir = -Dir;
             }
-
-
 
             Position = new Point(Position.X + VelocityX*Dir, Position.Y + VelocityY);
         }
