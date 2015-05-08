@@ -52,11 +52,6 @@ namespace StarWarsVP
             g.FillEllipse(b,Position.X + DEFAULT_RADIUS+DEFAULT_RADIUS/10,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }
 
-        public override bool IsHit(Shape s)
-        {
-            return false;
-        }
-
 
         public List<Bullet> Shoot()
         {

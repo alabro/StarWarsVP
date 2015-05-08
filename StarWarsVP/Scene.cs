@@ -62,8 +62,48 @@ namespace StarWarsVP
 
         }
 
+        public void DetectColisions()
+        {
+            foreach(Enemy e in Enemies){
+                if (e.IsHit(Player))
+                    {
+                        Player.Life--;
+                        e.Dead = true;
+                        if (Player.Life == 0)
+                        {
+                            //GAME OVER
+                            Player.Dead = true;
+                        }
+                    }
+                foreach (Bullet b in Bullets)
+                {
+                    if (e.IsHit(b))
+                    {
+                        if (b.Type == BulletType.GREEN)
+                        {
+                            Player.Score++;
+                        }
+                        e.Dead = true;
+                        b.Dead = true;
+                    }
+                    
+                    if(Player.IsHit(b) && BulletType.RED == b.Type){
+                        Player.Life--;
+                        b.Dead = true;
+                        if (Player.Life == 0)
+                        {
+                            //GAME OVER
+                            Player.Dead = true;
+                        }
+                    }
+                }
+
+            }
+        }
+
         public void Update()
         {
+            DetectColisions();
             if (count++ % 20 == 0)
             {
                 GenerateEnemies();
@@ -75,7 +115,7 @@ namespace StarWarsVP
             foreach (Bullet b in Bullets)
             {
                 b.Move(Direction.UP);
-                if (b.Position.Y >= Bounds.Top && b.Position.Y <= Bounds.Bottom)
+                if (b.Position.Y >= Bounds.Top && b.Position.Y <= Bounds.Bottom && !b.Dead)
                 {
                     AliveBullets.Add(b);
                 }
@@ -96,7 +136,7 @@ namespace StarWarsVP
                 {
                     Bullets.AddRange(e.Shoot());
                 }
-                if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom)
+                if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom && !e.Dead)
                 {
                     Alive.Add(e);
                 }
@@ -110,11 +150,20 @@ namespace StarWarsVP
             Player.Move(Direction);
         }
 
-  
+        public int Life()
+        {
+            return Player.Life;
+        }
+
 
         public void Shoot()
         {
             Bullets.AddRange(Player.Shoot());
+        }
+
+        public int GetScore()
+        {
+            return Player.Score;
         }
     }
 }
