@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Reflection;
 using System.Drawing.Imaging;
+using System.Data;
+using StarWarsVP.Properties;
 
 namespace StarWarsVP
 {
@@ -19,23 +21,25 @@ namespace StarWarsVP
         private bool doneLoading;
         public void LoadSprites()
         {
-            Assembly asm = Assembly.GetExecutingAssembly();
-            Bitmap plane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Falcon.bmp"));
-            Bitmap bPlane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Emp.bmp"));
-            Bitmap bullet1 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet1.bmp"));
-            Bitmap bullet2 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet2.bmp"));
-            Bitmap explotion = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Explotion.bmp"));
-            Plane = ParseSpriteStrip(plane);
-            BPlane = ParseSpriteStrip(bPlane);
-            Bullet1 = ParseSpriteStrip(bullet1);
-            Bullet2 = ParseSpriteStrip(bullet2);
-            Explotion = ParseSpriteStrip(explotion);
+            Bitmap plane = new Bitmap(Resources.Falcon);
+
+            //Assembly asm = Assembly.GetExecutingAssembly();
+            //Bitmap plane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Falcon.bmp"));
+            //Bitmap bPlane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Emp.bmp"));
+            //Bitmap bullet1 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet1.bmp"));
+            //Bitmap bullet2 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet2.bmp"));
+            //Bitmap explotion = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Explotion.bmp"));
+            //Plane = ParseSpriteStrip(plane);
+            //BPlane = ParseSpriteStrip(bPlane);
+            //Bullet1 = ParseSpriteStrip(bullet1);
+            //Bullet2 = ParseSpriteStrip(bullet2);
+            //Explotion = ParseSpriteStrip(explotion);
             
-            plane.Dispose();
-            bPlane.Dispose();
-            bullet1.Dispose();
-            bullet2.Dispose();
-            explotion.Dispose();
+            //plane.Dispose();
+            //bPlane.Dispose();
+            //bullet1.Dispose();
+            //bullet2.Dispose();
+            //explotion.Dispose();
 
             doneLoading = true;
         }

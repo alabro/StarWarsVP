@@ -96,6 +96,21 @@
   <ItemGroup>
     <None Include="Resources\background.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Falcon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explotion.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Emp.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bullet2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bullet1.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
