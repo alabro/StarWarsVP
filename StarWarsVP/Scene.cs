@@ -15,20 +15,17 @@ namespace StarWarsVP
         private List<Enemy> Enemies;
         private Player Player;
         private List<Bullet> Bullets;
-        private Semaphore bulletSemaphore;
-        private Semaphore enemySemaphore;
         private Random random;
         private int count;
 
         public Scene(Rectangle Rectangle)
         {
-            Bounds = Rectangle;
+            Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
+            Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS, Rectangle.Height);
             PLAYER_Y = Bounds.Bottom - 50;
-            Player = new Player(new Point(Bounds.Left + Bounds.Width / 2 - 15, Bounds.Bottom - 70));
+            Player = new Player(new Point(Bounds.Left + Bounds.Width / 2 - 15, Bounds.Bottom - Shape.DEFAULT_RADIUS*5));
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
-            bulletSemaphore = new Semaphore(1, 1);
-            enemySemaphore = new Semaphore(1, 1);
             random = new Random();
             count = 0;
         }
@@ -53,7 +50,7 @@ namespace StarWarsVP
             int n = random.Next(1, 4);
             for (int i = 0; i < n; i++)
             {
-                Enemies.Add(new Enemy(new Point(random.Next(0, Bounds.Right - 40), Bounds.Top + 10)));
+                Enemies.Add(new Enemy(new Point(random.Next(0, Bounds.Right - 40), Bounds.Top-Shape.DEFAULT_RADIUS)));
             }
 
         }
@@ -90,10 +87,10 @@ namespace StarWarsVP
                 e.Move(Direction.DOWN);
                 if (random.Next(0, 100) < 5)
                 {
-                    Bullet enemy = new Bullet(e.Position, Direction.DOWN, BulletType.RED);
+                    Bullet enemy = new Bullet(e.Position,BulletType.RED);
                     Bullets.Add(enemy);
                 }
-                if (e.Position.Y >= Bounds.Top && e.Position.Y <= Bounds.Bottom)
+                if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom)
                 {
                     Alive.Add(e);
                 }
@@ -111,11 +108,7 @@ namespace StarWarsVP
 
         public void Shoot()
         {
-            Point Position = Player.Position;
-            Bullet left = new Bullet(Position, Direction.UP,BulletType.GREEN);
-            Bullet right = new Bullet(new Point(Position.X+40,Position.Y), Direction.UP,BulletType.GREEN);
-            Bullets.Add(left);
-            Bullets.Add(right);
+            Player.Shoot();
         }
     }
 }

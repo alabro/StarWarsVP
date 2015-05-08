@@ -11,7 +11,7 @@ namespace StarWarsVP
     {
 
         private readonly int VELOCITY = 20;
-
+        public static int DEFAULT_RADIUS = 40;
         public Point Position { get; set; }
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }

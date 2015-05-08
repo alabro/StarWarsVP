@@ -6,10 +6,11 @@ using System.Drawing;
 
 namespace StarWarsVP
 {
-    public class Enemy : Shape
+    public class Enemy : Shape, Armed
     {
         private Random random;
         private int Dir;
+        private EnemyType Type;
 
         public Enemy(Point position)
             : base(position)
@@ -48,7 +49,7 @@ namespace StarWarsVP
         public override void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Aqua);
-            g.FillEllipse(b,new Rectangle(Position,new Size(40,40)));
+            g.FillEllipse(b,Position.X + DEFAULT_RADIUS,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }
 
         public override bool IsHit()
@@ -57,5 +58,9 @@ namespace StarWarsVP
         }
 
 
+        public List<Bullet> Shoot()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

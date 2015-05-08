@@ -23,8 +23,12 @@ namespace StarWarsVP
 
     public enum Direction
     {
-        UP,DOWN,LEFT,RIGHT
+        UP,DOWN,LEFT,RIGHT,DEFAULT
     }
 
+    public enum ShapeType
+    {
+        BULLET,ENEMY
+    }
 
 }
