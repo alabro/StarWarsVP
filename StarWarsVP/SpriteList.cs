@@ -23,16 +23,18 @@ namespace StarWarsVP
             Bitmap bPlane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Data.Sprites.Emp.bmp"));
             Bitmap bullet1 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Data.Sprites.Bullet1.bmp"));
             Bitmap bullet2 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Data.Sprites.Bullet2.bmp"));
-
+            Bitmap explotion = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Data.Sprites.Explotion.bmp"));
             Plane = ParseSpriteStrip(plane);
             BPlane = ParseSpriteStrip(bPlane);
             Bullet1 = ParseSpriteStrip(bullet1);
             Bullet2 = ParseSpriteStrip(bullet2);
+            Explotion = ParseSpriteStrip(explotion);
             
             plane.Dispose();
             bPlane.Dispose();
             bullet1.Dispose();
             bullet2.Dispose();
+            explotion.Dispose();
 
             doneLoading = true;
         }
