@@ -13,7 +13,7 @@ namespace StarWarsVP
 {
     public partial class Game : Form
     {
-        public static Image image = new Bitmap(Resources.falcon, new Size(Shape.DEFAULT_RADIUS, Shape.DEFAULT_RADIUS));
+        public static Image image = new Bitmap(Resources.Falcon1, new Size(Shape.DEFAULT_RADIUS, Shape.DEFAULT_RADIUS));
         private Scene Scene;
         Timer timer;
         int time;

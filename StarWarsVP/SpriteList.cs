@@ -21,7 +21,7 @@ namespace StarWarsVP
         private bool doneLoading;
         public void LoadSprites()
         {
-            Bitmap plane = new Bitmap(Resources.Falcon);
+            Bitmap plane = new Bitmap(Resources.Falcon1);
 
             //Assembly asm = Assembly.GetExecutingAssembly();
             //Bitmap plane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Falcon.bmp"));
