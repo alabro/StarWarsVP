@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace StarWarsVP
 {
-    public abstract class Shape
+    public abstract class Shape 
     {
 
         private readonly int VELOCITY = 20;

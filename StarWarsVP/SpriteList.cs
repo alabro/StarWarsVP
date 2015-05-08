@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Reflection;
+using System.Drawing.Imaging;
 
 namespace StarWarsVP
 {

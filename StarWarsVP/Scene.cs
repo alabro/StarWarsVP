@@ -8,7 +8,7 @@ using System.Threading;
 namespace StarWarsVP
 {
 
-    public class Scene
+    public class Scene : Sprites
     {
         private int PLAYER_Y;
         public static Rectangle Bounds;

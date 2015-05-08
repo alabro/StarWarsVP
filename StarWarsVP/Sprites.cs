@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 
 namespace StarWarsVP
 {
-    public class Sprites : Shape
+    public class Sprites : IDrawable
     {
         protected int x;
         protected int y;
@@ -23,6 +23,8 @@ namespace StarWarsVP
             collitionRectangle.Y = y + collitionPoint.Y;
             return collitionRectangle;
         }
+
+        public abstract void Draw(Graphics g);
 
         public void Sprite()
 		{
