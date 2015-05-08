@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace StarWarsVP
 {
-    public abstract class Shape
+    public abstract class Shape : Sprites
     {
 
         private readonly int VELOCITY = 20;
@@ -16,6 +16,7 @@ namespace StarWarsVP
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }
         public bool Hit { get; set; }
+        public bool Dead { get; set; }
 
         public Shape(Point position)
         {
@@ -23,13 +24,15 @@ namespace StarWarsVP
             VelocityX = VELOCITY;
             VelocityY = VELOCITY;
             Hit = false;
+            Dead = false;
         }
 
         public abstract void Move(Direction direction);
 
         public abstract void Draw(Graphics g);
 
-        public abstract bool IsHit();
+        public abstract bool IsHit(Shape s);
+
 
 
     }

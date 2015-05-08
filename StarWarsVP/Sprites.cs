@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 
 namespace StarWarsVP
 {
-    public class Sprites : Shape
+    public class Sprites
     {
         protected int x;
         protected int y;
@@ -16,7 +16,6 @@ namespace StarWarsVP
         protected Point collitionPoint;
         protected Rectangle collitionRectangle;
         protected ImageAttributes imgAttribs;
-        public abstract int GetSpriteIndex();
         public virtual Rectangle GetCollitionRectangle()
         {
             collitionRectangle.X = x + collitionPoint.X;
@@ -35,6 +34,7 @@ namespace StarWarsVP
 			imgAttribs = new ImageAttributes();			
 			imgAttribs.SetColorKey(Color.FromArgb(0, 66, 173), Color.FromArgb(0, 66, 173));
 		}
+        
     }
 }
 

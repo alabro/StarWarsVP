@@ -9,6 +9,6 @@ namespace StarWarsVP
 {
     public interface Armed
     {
-        public List<Bullet> Shoot();
+        List<Bullet> Shoot();
     }
 }
