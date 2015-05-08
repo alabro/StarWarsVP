@@ -29,7 +29,7 @@ namespace StarWarsVP
         {
             lblTime.Text = "00:00";
             time = 0;
-            SpriteList.Instance.LoadSprites();
+            //SpriteList.Instance.LoadSprites();
             Scene = new Scene(pnlScene.DisplayRectangle);
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
