@@ -47,10 +47,17 @@ namespace StarWarsVP
 
         private void GenerateEnemies()
         {
-            int n = random.Next(1, 4);
+            int n = random.Next(0, 4);
+            int lastX = -Shape.DEFAULT_RADIUS*2;
+            int p = 0;
             for (int i = 0; i < n; i++)
             {
-                Enemies.Add(new Enemy(new Point(random.Next(0, Bounds.Right - 40), Bounds.Top-Shape.DEFAULT_RADIUS)));
+                p = random.Next(0, Bounds.Width);
+                while( p >= lastX && p<=lastX+Shape.DEFAULT_RADIUS*2){
+                    p = random.Next(0, Bounds.Width);
+                }
+                Enemies.Add(new Enemy(new Point((Shape.DEFAULT_RADIUS*2 + p)%Bounds.Width, Bounds.Top-Shape.DEFAULT_RADIUS + i * Shape.DEFAULT_RADIUS * 2)));
+                lastX = p;
             }
 
         }
@@ -87,8 +94,7 @@ namespace StarWarsVP
                 e.Move(Direction.DOWN);
                 if (random.Next(0, 100) < 5)
                 {
-                    Bullet enemy = new Bullet(e.Position,BulletType.RED);
-                    Bullets.Add(enemy);
+                    Bullets.AddRange(e.Shoot());
                 }
                 if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom)
                 {
@@ -108,7 +114,7 @@ namespace StarWarsVP
 
         public void Shoot()
         {
-            Player.Shoot();
+            Bullets.AddRange(Player.Shoot());
         }
     }
 }

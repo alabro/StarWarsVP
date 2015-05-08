@@ -73,7 +73,10 @@ namespace StarWarsVP
         {
             //TODO SAVE SCORE
             ToggleViews();
-            timer.Stop();
+            if (timer != null)
+            {
+                timer.Stop();
+            }
             Scene = null;
             pnlScene.Visible = false;
             pnlHighScores.Visible = false;

@@ -49,10 +49,10 @@ namespace StarWarsVP
         public override void Draw(Graphics g)
         {
             Brush b = new SolidBrush(Color.Aqua);
-            g.FillEllipse(b,Position.X + DEFAULT_RADIUS,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
+            g.FillEllipse(b,Position.X + DEFAULT_RADIUS+DEFAULT_RADIUS/10,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }
 
-        public override bool IsHit()
+        public override bool IsHit(Shape s)
         {
             return false;
         }
@@ -60,7 +60,9 @@ namespace StarWarsVP
 
         public List<Bullet> Shoot()
         {
-            throw new NotImplementedException();
+            List<Bullet> Bullets = new List<Bullet>();
+            Bullets.Add(new Bullet(new Point(Position.X + DEFAULT_RADIUS, Position.Y + DEFAULT_RADIUS*2), BulletType.RED));
+            return Bullets; 
         }
     }
 }
