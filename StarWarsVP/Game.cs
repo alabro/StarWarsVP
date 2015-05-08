@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StarWarsVP.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace StarWarsVP
 {
     public partial class Game : Form
     {
+        public static Image image = new Bitmap(Resources.falcon, new Size(Shape.DEFAULT_RADIUS, Shape.DEFAULT_RADIUS));
         private Scene Scene;
         Timer timer;
         int time;
@@ -38,8 +40,9 @@ namespace StarWarsVP
         void timer_Tick(object sender, EventArgs e)
         {
             time++;
-            lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
+            //lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
             Scene.Update();
+            lblTime.Text = string.Format("{0}", Scene.Life());
             pnlScene.Invalidate();
         }
 

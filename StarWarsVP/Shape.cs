@@ -12,6 +12,7 @@ namespace StarWarsVP
 
         private readonly int VELOCITY = 20;
         public static int DEFAULT_RADIUS = 40;
+        protected int Radius;
         public Point Position { get; set; }
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }
@@ -23,6 +24,7 @@ namespace StarWarsVP
             Position = position;
             VelocityX = VELOCITY;
             VelocityY = VELOCITY;
+            Radius = DEFAULT_RADIUS;
             Hit = false;
             Dead = false;
         }
@@ -31,7 +33,10 @@ namespace StarWarsVP
 
         public abstract void Draw(Graphics g);
 
-        public abstract bool IsHit(Shape s);
+        public bool IsHit(Shape s)
+        {
+            return ((Position.X - s.Position.X) * (Position.X - s.Position.X) + (Position.Y - s.Position.Y) * (Position.Y - s.Position.Y) <= Radius * Radius);
+        }
 
 
 
