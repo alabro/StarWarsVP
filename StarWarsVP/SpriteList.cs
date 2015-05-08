@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Drawing.Imaging;
 using System.Data;
 using StarWarsVP.Properties;
+
 namespace StarWarsVP
 {
     public class SpriteList
@@ -20,8 +21,10 @@ namespace StarWarsVP
         private bool doneLoading;
         public void LoadSprites()
         {
+            Bitmap plane = new Bitmap(Resources.Falcon);
+
             //Assembly asm = Assembly.GetExecutingAssembly();
-            //Bitmap falcon = new Bitmap(Resources.falcon);
+            //Bitmap plane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Falcon.bmp"));
             //Bitmap bPlane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Emp.bmp"));
             //Bitmap bullet1 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet1.bmp"));
             //Bitmap bullet2 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet2.bmp"));
