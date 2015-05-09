@@ -17,33 +17,30 @@ namespace StarWarsVP
         public Bitmap[] BPlane;
         public Bitmap[] Bullet1;
         public Bitmap[] Bullet2;
-        public Bitmap[] Explotion;
+        public Bitmap[] Explosion;
         private bool doneLoading;
         public void LoadSprites()
         {
-            Bitmap plane = new Bitmap(Resources.Falcon1);
-
-            //Assembly asm = Assembly.GetExecutingAssembly();
-            //Bitmap plane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Falcon.bmp"));
-            //Bitmap bPlane = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Emp.bmp"));
-            //Bitmap bullet1 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet1.bmp"));
-            //Bitmap bullet2 = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Bullet2.bmp"));
-            //Bitmap explotion = new Bitmap(asm.GetManifestResourceStream("StarWarsVP.Resources.Explotion.bmp"));
-            //Plane = ParseSpriteStrip(plane);
-            //BPlane = ParseSpriteStrip(bPlane);
-            //Bullet1 = ParseSpriteStrip(bullet1);
-            //Bullet2 = ParseSpriteStrip(bullet2);
-            //Explotion = ParseSpriteStrip(explotion);
-            
-            //plane.Dispose();
-            //bPlane.Dispose();
-            //bullet1.Dispose();
-            //bullet2.Dispose();
-            //explotion.Dispose();
-
+            Bitmap Falcon = new Bitmap(Resources.Falcon1);
+            Bitmap Enemy = new Bitmap(Resources.Emp);
+            Bitmap bullet1 = new Bitmap(Resources.Bullet1);
+            Bitmap bullet2 = new Bitmap(Resources.Bullet2);
+            Bitmap explosion = new Bitmap(Resources.Explosion);
+            Plane = ParseSpriteStrip(Falcon);
+            BPlane = ParseSpriteStrip(Enemy);
+            Bullet1 = ParseSpriteStrip(bullet1);
+            Bullet2 = ParseSpriteStrip(bullet2);
+            Explosion = ParseSpriteStrip(explosion);
+            Falcon.Dispose();
+            Enemy.Dispose();
+            bullet1.Dispose();
+            bullet2.Dispose();
+            explosion.Dispose();
             doneLoading = true;
         }
+
         public static readonly SpriteList Instance = new SpriteList();
+
         private Bitmap[] ParseSpriteStrip(Bitmap spriteStrip)
         {
             Rectangle spriteRectangle = new Rectangle(1, 1, spriteStrip.Height - 2, spriteStrip.Height - 2);
@@ -60,6 +57,7 @@ namespace StarWarsVP
 
             return destinationArray;
         }
+
         private SpriteList()
         {
         }

@@ -17,9 +17,11 @@ namespace StarWarsVP
         private List<Bullet> Bullets;
         private Random random;
         private int count;
+        private SpriteList List;
 
         public Scene(Rectangle Rectangle)
         {
+            SpriteList List = SpriteList.Instance;
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
             Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS, Rectangle.Height);
             PLAYER_Y = Bounds.Bottom - 50;
