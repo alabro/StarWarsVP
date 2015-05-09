@@ -22,34 +22,53 @@ namespace StarWarsVP
 
         public override void Move(Direction direction)
         {
-            int newVel = random.Next(0,11);
-            VelocityX = newVel;
-            if (random.Next(0, 100) < 10)
+            if (!Hit)
             {
-                Dir = -Dir;
-            }
+                int newVel = random.Next(0, 11);
+                VelocityX = newVel;
+                if (random.Next(0, 100) < 10)
+                {
+                    Dir = -Dir;
+                }
 
-            if (Position.X - VelocityX*Dir <= Scene.Bounds.Left + 40)
-            {
-                Dir = -Dir;
-            }
+                if (Position.X - VelocityX * Dir <= Scene.Bounds.Left + 40)
+                {
+                    Dir = -Dir;
+                }
 
-            if (Position.X + VelocityX * Dir >= Scene.Bounds.Right-40)
-            {
-                Dir = -Dir;
-            }
+                if (Position.X + VelocityX * Dir >= Scene.Bounds.Right - 40)
+                {
+                    Dir = -Dir;
+                }
 
-            if (Position.X + VelocityX * Dir >= Scene.Bounds.Left || Position.X + VelocityX * Dir <= Scene.Bounds.Right)
-            {
-                Position = new Point(Position.X + VelocityX*Dir, Position.Y + VelocityY);
+                if (Position.X + VelocityX * Dir >= Scene.Bounds.Left || Position.X + VelocityX * Dir <= Scene.Bounds.Right)
+                {
+                    Position = new Point(Position.X + VelocityX * Dir, Position.Y + VelocityY);
+                }
+                Position = new Point(Position.X, Position.Y + VelocityY);
             }
-            Position = new Point(Position.X, Position.Y + VelocityY);
         }
 
         public override void Draw(Graphics g)
         {
-            Brush b = new SolidBrush(Color.Aqua);
-            g.FillEllipse(b,Position.X + DEFAULT_RADIUS+DEFAULT_RADIUS/10,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
+            Image i = SpriteList.Instance.Imperial[0];
+            if (!Hit)
+            {
+                if (DateTime.Now.Millisecond%2==0)
+                {
+                    //i = SpriteList.Instance.Imperial[1];
+                }
+            }
+            else
+            {
+                timeToDie++;
+                if (timeToDie == 10)
+                {
+                    Dead = true;
+                }
+                i = SpriteList.Instance.Explosion[timeToDie];
+            }
+            g.DrawImage(i,Position.X + DEFAULT_RADIUS+DEFAULT_RADIUS/10,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }
 
 

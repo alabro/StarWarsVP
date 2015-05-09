@@ -17,18 +17,21 @@ namespace StarWarsVP
         Timer timer;
         int time;
         static readonly int TIMER_INTERVAL = 40;
+        public SpriteList Sprites;
+
 
         public Game()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+            Sprites = SpriteList.GetSprites();
         }
 
         public void NewGame()
         {
             lblTime.Text = "00:00";
             time = 0;
-            //SpriteList.Instance.LoadSprites();
+            
             Scene = new Scene(pnlScene.DisplayRectangle);
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
@@ -41,7 +44,7 @@ namespace StarWarsVP
             time++;
             //lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
             Scene.Update();
-            lblTime.Text = string.Format("{0}", Scene.Life());
+            lblTime.Text = string.Format("{0}", Scene.timeto());
             pnlScene.Invalidate();
         }
 
@@ -55,9 +58,12 @@ namespace StarWarsVP
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            pnlScene.Visible = true;
-            ToggleViews();
-            NewGame();
+            if (Sprites.DoneLoading)
+            {
+                pnlScene.Visible = true;
+                ToggleViews();
+                NewGame();
+            }
         }
 
         private void btnHighScores_Click(object sender, EventArgs e)

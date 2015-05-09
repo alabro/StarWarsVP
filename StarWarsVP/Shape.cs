@@ -11,13 +11,14 @@ namespace StarWarsVP
     {
 
         private readonly int VELOCITY = 20;
-        public static int DEFAULT_RADIUS = 40;
+        public static int DEFAULT_RADIUS = 100;
         protected int Radius;
         public Point Position { get; set; }
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }
         public bool Hit { get; set; }
         public bool Dead { get; set; }
+        protected int timeToDie;
 
         public Shape(Point position)
         {
@@ -25,6 +26,7 @@ namespace StarWarsVP
             VelocityX = VELOCITY;
             VelocityY = VELOCITY;
             Radius = DEFAULT_RADIUS;
+            timeToDie = 0;
             Hit = false;
             Dead = false;
         }

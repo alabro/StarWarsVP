@@ -57,6 +57,11 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Scene.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="SpriteList.cs" />
@@ -66,14 +71,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -91,25 +91,70 @@
     <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\falcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\background.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Falcon.bmp" />
+    <None Include="Resources\Enemies\imperialFighter.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Explotion.bmp" />
+    <None Include="Resources\Fighter\fighter.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Emp.bmp" />
+    <None Include="Resources\Fighter\fighter2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Bullet2.bmp" />
+    <None Include="Resources\Fighter\fighter1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Bullet1.bmp" />
+    <None Include="Resources\Fighter\fighter3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fighter\fighter4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fighter\fighter5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Explosion\e11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLaser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenLaser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemies\imperialFighter1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

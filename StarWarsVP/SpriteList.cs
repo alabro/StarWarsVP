@@ -13,53 +13,59 @@ namespace StarWarsVP
 {
     public class SpriteList
     {
-        public Bitmap[] Plane;
-        public Bitmap[] BPlane;
-        public Bitmap[] Bullet1;
-        public Bitmap[] Bullet2;
-        public Bitmap[] Explosion;
-        private bool doneLoading;
+        public List<Bitmap> Fighter;
+        public List<Bitmap> Imperial;
+        public List<Bitmap> Explosion;
+        public List<Bitmap> Bullets;
+        public bool DoneLoading;
+
         public void LoadSprites()
         {
-            Bitmap Falcon = new Bitmap(Resources.Falcon1);
-            Bitmap Enemy = new Bitmap(Resources.Emp);
-            Bitmap bullet1 = new Bitmap(Resources.Bullet1);
-            Bitmap bullet2 = new Bitmap(Resources.Bullet2);
-            Bitmap explosion = new Bitmap(Resources.Explosion);
-            Plane = ParseSpriteStrip(Falcon);
-            BPlane = ParseSpriteStrip(Enemy);
-            Bullet1 = ParseSpriteStrip(bullet1);
-            Bullet2 = ParseSpriteStrip(bullet2);
-            Explosion = ParseSpriteStrip(explosion);
-            Falcon.Dispose();
-            Enemy.Dispose();
-            bullet1.Dispose();
-            bullet2.Dispose();
-            explosion.Dispose();
-            doneLoading = true;
+            Fighter.Add(Resources.fighter);
+            Fighter.Add(Resources.fighter1);
+            Fighter.Add(Resources.fighter2);
+            Fighter.Add(Resources.fighter3);
+            Fighter.Add(Resources.fighter4);
+            Fighter.Add(Resources.fighter5);
+
+            Explosion.Add(Resources.e1);
+            Explosion.Add(Resources.e2);
+            Explosion.Add(Resources.e3);
+            Explosion.Add(Resources.e4);
+            Explosion.Add(Resources.e5);
+            Explosion.Add(Resources.e6);
+            Explosion.Add(Resources.e7);
+            Explosion.Add(Resources.e8);
+            Explosion.Add(Resources.e9);
+            Explosion.Add(Resources.e10);
+            Explosion.Add(Resources.e11);
+
+            Bullets.Add(Resources.RedLaser);
+            Bullets.Add(Resources.GreenLaser);
+
+            Imperial.Add(Resources.imperialFighter);
+
+            DoneLoading = true;
         }
 
-        public static readonly SpriteList Instance = new SpriteList();
+        public static SpriteList Instance;
 
-        private Bitmap[] ParseSpriteStrip(Bitmap spriteStrip)
-        {
-            Rectangle spriteRectangle = new Rectangle(1, 1, spriteStrip.Height - 2, spriteStrip.Height - 2);
-            Bitmap[] destinationArray = new Bitmap[(spriteStrip.Width - 1) / (spriteStrip.Height - 1)];
-
-            for (int i = 0; i < destinationArray.Length; ++i)
+        public static SpriteList GetSprites(){
+            if (Instance == null)
             {
-                destinationArray[i] = new Bitmap(spriteRectangle.Width, spriteRectangle.Height);
-                Graphics g = Graphics.FromImage(destinationArray[i]);
-                spriteRectangle.X = i * (spriteRectangle.Width + 2) - (i - 1);
-                g.DrawImage(spriteStrip, 0, 0, spriteRectangle, GraphicsUnit.Pixel);
-                g.Dispose();
+                Instance = new SpriteList();
             }
-
-            return destinationArray;
+            return Instance;
         }
 
         private SpriteList()
         {
+            DoneLoading = false;
+            Fighter = new List<Bitmap>();
+            Imperial = new List<Bitmap>();
+            Explosion = new List<Bitmap>();
+            Bullets = new List<Bitmap>();
+            LoadSprites();
         }
     }
 }

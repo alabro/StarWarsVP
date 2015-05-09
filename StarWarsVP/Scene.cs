@@ -17,11 +17,11 @@ namespace StarWarsVP
         private List<Bullet> Bullets;
         private Random random;
         private int count;
-        private SpriteList List;
+        
 
         public Scene(Rectangle Rectangle)
         {
-            SpriteList List = SpriteList.Instance;
+
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
             Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS, Rectangle.Height);
             PLAYER_Y = Bounds.Bottom - 50;
@@ -69,8 +69,9 @@ namespace StarWarsVP
             foreach(Enemy e in Enemies){
                 if (e.IsHit(Player))
                     {
-                        Player.Life--;
-                        e.Dead = true;
+                        Player.DecreaseLife();
+                        Player.Hit = true;
+                        e.Hit = true;
                         if (Player.Life == 0)
                         {
                             //GAME OVER
@@ -85,12 +86,13 @@ namespace StarWarsVP
                         {
                             Player.Score++;
                         }
-                        e.Dead = true;
+                        e.Hit = true;
                         b.Dead = true;
                     }
                     
                     if(Player.IsHit(b) && BulletType.RED == b.Type){
-                        Player.Life--;
+                        Player.DecreaseLife();
+                        Player.Hit = true;
                         b.Dead = true;
                         if (Player.Life == 0)
                         {
@@ -136,7 +138,10 @@ namespace StarWarsVP
                 e.Move(Direction.DOWN);
                 if (random.Next(0, 100) < 5)
                 {
-                    Bullets.AddRange(e.Shoot());
+                    if (!e.Hit)
+                    {
+                        Bullets.AddRange(e.Shoot());
+                    }
                 }
                 if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom && !e.Dead)
                 {
@@ -155,6 +160,11 @@ namespace StarWarsVP
         public int Life()
         {
             return Player.Life;
+        }
+
+        public int timeto()
+        {
+            return Player.getTime();
         }
 
 
