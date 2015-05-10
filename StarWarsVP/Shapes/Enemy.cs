@@ -38,7 +38,6 @@ namespace StarWarsVP
                         VelocityX = VelocityX>0? -newVel:newVel;
                     }
                 }
-
                 Position = new Point(Position.X + VelocityX, Position.Y + VelocityY);
             }
         }
