@@ -38,6 +38,7 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
             this.pnlHighScores = new System.Windows.Forms.Panel();
+            this.lblScores = new System.Windows.Forms.Label();
             this.pnlScene = new StarWarsVP.Game.PanelDoubleBuffered();
             this.pnlScore = new System.Windows.Forms.Panel();
             this.pbHeart3 = new System.Windows.Forms.PictureBox();
@@ -46,7 +47,7 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblScores = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
@@ -62,7 +63,7 @@
             this.pbLogo.BackColor = System.Drawing.Color.Transparent;
             this.pbLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbLogo.BackgroundImage")));
             this.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbLogo.Location = new System.Drawing.Point(0, -11);
+            this.pbLogo.Location = new System.Drawing.Point(0, 3);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(357, 153);
             this.pbLogo.TabIndex = 0;
@@ -138,11 +139,11 @@
             // pnlMainMenu
             // 
             this.pnlMainMenu.BackColor = System.Drawing.Color.Transparent;
-            this.pnlMainMenu.Controls.Add(this.pbLogo);
+            this.pnlMainMenu.Controls.Add(this.pnlHighScores);
             this.pnlMainMenu.Controls.Add(this.btnExit);
             this.pnlMainMenu.Controls.Add(this.btnNewGame);
             this.pnlMainMenu.Controls.Add(this.btnHighScores);
-            this.pnlMainMenu.Controls.Add(this.pnlHighScores);
+            this.pnlMainMenu.Controls.Add(this.pbLogo);
             this.pnlMainMenu.Location = new System.Drawing.Point(14, 12);
             this.pnlMainMenu.Name = "pnlMainMenu";
             this.pnlMainMenu.Size = new System.Drawing.Size(358, 499);
@@ -150,12 +151,24 @@
             // 
             // pnlHighScores
             // 
+            this.pnlHighScores.Controls.Add(this.listBox1);
             this.pnlHighScores.Controls.Add(this.lblScores);
             this.pnlHighScores.Location = new System.Drawing.Point(0, 22);
             this.pnlHighScores.Name = "pnlHighScores";
             this.pnlHighScores.Size = new System.Drawing.Size(354, 474);
             this.pnlHighScores.TabIndex = 5;
             this.pnlHighScores.Visible = false;
+            // 
+            // lblScores
+            // 
+            this.lblScores.AutoSize = true;
+            this.lblScores.Font = new System.Drawing.Font("Impact", 12F);
+            this.lblScores.ForeColor = System.Drawing.Color.Gold;
+            this.lblScores.Location = new System.Drawing.Point(52, 46);
+            this.lblScores.Name = "lblScores";
+            this.lblScores.Size = new System.Drawing.Size(47, 20);
+            this.lblScores.TabIndex = 0;
+            this.lblScores.Text = "label1";
             // 
             // pnlScene
             // 
@@ -241,16 +254,13 @@
             this.lblTitle.Size = new System.Drawing.Size(0, 13);
             this.lblTitle.TabIndex = 0;
             // 
-            // lblScores
+            // listBox1
             // 
-            this.lblScores.AutoSize = true;
-            this.lblScores.Font = new System.Drawing.Font("Impact", 12F);
-            this.lblScores.ForeColor = System.Drawing.Color.Gold;
-            this.lblScores.Location = new System.Drawing.Point(67, 32);
-            this.lblScores.Name = "lblScores";
-            this.lblScores.Size = new System.Drawing.Size(47, 20);
-            this.lblScores.TabIndex = 0;
-            this.lblScores.Text = "label1";
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(56, 132);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(258, 290);
+            this.listBox1.TabIndex = 1;
             // 
             // Game
             // 
@@ -259,8 +269,8 @@
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(384, 561);
-            this.Controls.Add(this.pnlOptions);
             this.Controls.Add(this.pnlScore);
+            this.Controls.Add(this.pnlOptions);
             this.Controls.Add(this.pnlMainMenu);
             this.Controls.Add(this.pnlScene);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -306,6 +316,7 @@
         private System.Windows.Forms.PictureBox pbHeart1;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Label lblScores;
+        private System.Windows.Forms.ListBox listBox1;
     
         public class PanelDoubleBuffered : System.Windows.Forms.Panel
         {

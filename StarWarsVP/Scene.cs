@@ -19,6 +19,8 @@ namespace StarWarsVP
         private List<Bullet> Bullets;
         private Random random;
         private int GenerationFactor;
+        private GameOver End;
+        private PlayerScore Score;
         
 
         public Scene(Rectangle Rectangle)
@@ -85,6 +87,7 @@ namespace StarWarsVP
                         if (Player.Life == 0)
                         {
                             //GAME OVER
+                            EndGame();
                             Player.Dead = true;
                         }
                     }
@@ -107,6 +110,7 @@ namespace StarWarsVP
                             if (Player.Life == 0)
                             {
                                 //GAME OVER
+                                EndGame();
                                 Player.Dead = true;
                             }
                         }
@@ -115,6 +119,20 @@ namespace StarWarsVP
 
             }
         }
+
+        public void EndGame()
+        {
+            if (End == null)
+            {
+                End = new GameOver(GetScore());
+                if (End.DialogResult == System.Windows.Forms.DialogResult.Yes)
+                {
+                    Serializer.AddPlayer(End.PlayerScore);
+                }
+                End.Show();
+            }
+        }
+
 
         public void Update()
         {

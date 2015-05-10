@@ -34,6 +34,7 @@ namespace StarWarsVP
             Serializer.AddPlayer(new PlayerScore("LABRO", 100));
             Serializer.AddPlayer(new PlayerScore("LABRO", 100));
             Serializer.AddPlayer(new PlayerScore("LABRO", 100));
+            Serializer.SaveScores();
         }
 
         public void NewGame()
@@ -109,18 +110,13 @@ namespace StarWarsVP
             btnRestart.Visible = false;
             pnlHighScores.Visible = true;
             pnlHighScores.Visible = true;
-            StringBuilder sb = new StringBuilder();
-            List<PlayerScore> list = Serializer.GetScores();
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append(string.Format("{0}. {1}", (i + 1), list[i]));
-            }
+            lblScores.Text = Serializer.GetString();
             lblScores.Visible = true;
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            Serializer.SaveScores();
             Application.Exit();
         }
 
@@ -136,6 +132,7 @@ namespace StarWarsVP
             {
                 timer.Stop();
             }
+            lblScores.Visible = false;
             btnRestart.Visible = false;
             Scene = null;
             pnlScene.Visible = false;
@@ -148,8 +145,6 @@ namespace StarWarsVP
         {
             if (Scene != null)
             {
-                
-
                 if (e.KeyCode == Keys.D)
                 {
                     Scene.Shoot();
@@ -165,7 +160,10 @@ namespace StarWarsVP
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            //TODO SAVE SCORE
+            if (Scene != null && Scene.Life()!=0)
+            {
+                Scene.EndGame();
+            }
             timer.Stop();
             NewGame();
         }
