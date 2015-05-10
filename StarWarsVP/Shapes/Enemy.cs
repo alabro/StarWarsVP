@@ -59,7 +59,7 @@ namespace StarWarsVP
                 {
                     Dead = true;
                 }
-                i = SpriteList.Instance.Explosion[timeToDie];
+                i = SpriteList.Instance.Explosion[timeToDie%10];
             }
             g.DrawImage(i,Position.X + DEFAULT_RADIUS,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }

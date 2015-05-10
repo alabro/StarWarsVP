@@ -123,25 +123,39 @@ namespace StarWarsVP
             }
         }
 
-        public void EndGame()
+        public bool EndGame()
         {
+            bool status = false;
             if (End == null)
             {
                 End = new GameOver(GetScore());
-                End.ShowDialog();
+                if (End.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                {
+                    status = true;
+                }
+                End.Dispose();
+                End = null;
             }
+            if (Player.Dead)
+            {
+                status = true;
+            }
+            return status;
         }
 
 
         public void Update()
         {
-            GenerateEnemies();
+            if (!Player.Dead)
+            {
+                GenerateEnemies();
 
-            DetectColisions();
+                DetectColisions();
 
-            UpdateEnemies();
+                UpdateEnemies();
 
-            UpdateBullets();
+                UpdateBullets();
+            }
         }
 
         private void UpdateBullets()

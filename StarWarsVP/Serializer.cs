@@ -13,7 +13,6 @@ namespace StarWarsVP
     {
 
         private static List<PlayerScore> HighScores;
-
         private static readonly string filePath = "HighScores.bin";
 
         public static void WriteToBinaryFile<T>(T objectToWrite, bool append = false)

@@ -68,6 +68,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.btnDone.Font = new System.Drawing.Font("Impact", 20.25F);
             this.btnDone.Location = new System.Drawing.Point(13, 192);
             this.btnDone.Name = "btnDone";

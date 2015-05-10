@@ -35,6 +35,7 @@ namespace StarWarsVP
 
         public void NewGame()
         {
+            System.Threading.Thread.Sleep(100);
             Scene = new Scene(pnlScene.DisplayRectangle);
             Theme = new SoundPlayer(Resources.imperial);
             Theme.PlayLooping();
@@ -158,12 +159,25 @@ namespace StarWarsVP
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            if (Scene != null && Scene.Life()!=0)
-            {
-                Scene.EndGame();
-            }
             timer.Stop();
-            NewGame();
+            if (Scene != null)
+            {
+                if (Scene.Life() == 0)
+                {
+                    NewGame();
+                }
+                else
+                {
+                    if (Scene.EndGame())
+                    {
+                        NewGame();
+                    }
+                    else
+                    {
+                        timer.Start();
+                    }
+                }
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
