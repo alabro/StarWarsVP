@@ -21,18 +21,8 @@ namespace StarWarsVP
         private int GenerationFactor;
         private GameOver End;
 
-        private static Scene Instance;
 
-        public static Scene GetScene(Rectangle Rectangle)
-        {
-            if (Instance == null)
-            {
-                Instance = new Scene(Rectangle);
-            }
-            return Instance;
-        }
-
-        private Scene(Rectangle Rectangle)
+        public Scene(Rectangle Rectangle)
         {
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
             Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS*2, Rectangle.Height);
@@ -99,30 +89,35 @@ namespace StarWarsVP
                             Player.Dead = true;
                         }
                     }
-                    foreach (Bullet b in Bullets)
+                    if (Bullets.Count != 0)
                     {
-                        if (e.IsHit(b))
+                        foreach (Bullet b in Bullets)
                         {
-                            if (b.Type == BulletType.GREEN)
+                            if (e.IsHit(b))
                             {
-                                Player.Score++;
+                                if (b.Type == BulletType.GREEN)
+                                {
+                                    Player.Score++;
+                                }
+                                e.Hit = true;
+                                b.Dead = true;
                             }
-                            e.Hit = true;
-                            b.Dead = true;
-                        }
-                    
-                        if(Player.IsHit(b) && BulletType.RED == b.Type){
-                            Player.DecreaseLife();
-                            Player.Hit = true;
-                            b.Dead = true;
-                            if (Player.Life == 0)
+
+                            if (Player.IsHit(b) && BulletType.RED == b.Type)
                             {
-                                //GAME OVER
-                                EndGame();
-                                Player.Dead = true;
+                                Player.DecreaseLife();
+                                Player.Hit = true;
+                                b.Dead = true;
+                                if (Player.Life == 0)
+                                {
+                                    //GAME OVER
+                                    EndGame();
+                                    Player.Dead = true;
+                                }
                             }
                         }
                     }
+                    
                 }
 
             }
@@ -220,5 +215,6 @@ namespace StarWarsVP
         {
             return Player.Dead;
         }
+
     }
 }
