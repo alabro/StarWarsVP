@@ -20,12 +20,20 @@ namespace StarWarsVP
         private Random random;
         private int GenerationFactor;
         private GameOver End;
-        private PlayerScore Score;
-        
 
-        public Scene(Rectangle Rectangle)
+        private static Scene Instance;
+
+        public static Scene GetScene(Rectangle Rectangle)
         {
+            if (Instance == null)
+            {
+                Instance = new Scene(Rectangle);
+            }
+            return Instance;
+        }
 
+        private Scene(Rectangle Rectangle)
+        {
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
             Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS*2, Rectangle.Height);
             PLAYER_Y = Bounds.Bottom - Shape.DEFAULT_RADIUS;
@@ -125,7 +133,7 @@ namespace StarWarsVP
             if (End == null)
             {
                 End = new GameOver(GetScore());
-                End.Show();
+                End.ShowDialog();
             }
         }
 
@@ -139,7 +147,6 @@ namespace StarWarsVP
             UpdateEnemies();
 
             UpdateBullets();
-            
         }
 
         private void UpdateBullets()

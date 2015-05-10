@@ -36,11 +36,11 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.pnlOptions = new System.Windows.Forms.Panel();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.pnlMainMenu = new System.Windows.Forms.Panel();
-            this.pnlHighScores = new System.Windows.Forms.Panel();
+            this.pnlMainMenu = new StarWarsVP.Game.PanelDoubleBuffered();
+            this.pnlHighScores = new StarWarsVP.Game.PanelDoubleBuffered();
             this.lblScores = new System.Windows.Forms.Label();
             this.pnlScene = new StarWarsVP.Game.PanelDoubleBuffered();
-            this.pnlScore = new System.Windows.Forms.Panel();
+            this.pnlScore = new StarWarsVP.Game.PanelDoubleBuffered();
             this.pbHeart3 = new System.Windows.Forms.PictureBox();
             this.pbHeart2 = new System.Windows.Forms.PictureBox();
             this.pbHeart1 = new System.Windows.Forms.PictureBox();

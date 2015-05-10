@@ -35,7 +35,7 @@ namespace StarWarsVP
 
         public void NewGame()
         {
-            Scene = new Scene(pnlScene.DisplayRectangle);
+            Scene = Scene.GetScene(pnlScene.DisplayRectangle);
             Theme = new SoundPlayer(Resources.imperial);
             Theme.PlayLooping();
             lblTime.Text = "00:00";
