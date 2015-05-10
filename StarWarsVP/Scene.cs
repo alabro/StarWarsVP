@@ -8,7 +8,7 @@ using System.Threading;
 namespace StarWarsVP
 {
 
-    public class Scene : Sprites
+    public class Scene
     {
         private int PLAYER_Y;
         public static Rectangle Bounds;
@@ -16,7 +16,7 @@ namespace StarWarsVP
         private Player Player;
         private List<Bullet> Bullets;
         private Random random;
-        private int count;
+        private int GenerationFactor;
         
 
         public Scene(Rectangle Rectangle)
@@ -29,7 +29,7 @@ namespace StarWarsVP
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
             random = new Random();
-            count = 0;
+            GenerationFactor = 0;
         }
 
         public void Draw(Graphics g)
@@ -49,17 +49,23 @@ namespace StarWarsVP
 
         private void GenerateEnemies()
         {
-            int n = random.Next(0, 4);
-            int lastX = -Shape.DEFAULT_RADIUS*2;
-            int p = 0;
-            for (int i = 0; i < n; i++)
+            GenerationFactor++;
+            if (GenerationFactor % 20 == 0)
             {
-                p = random.Next(0, Bounds.Width);
-                while( p >= lastX && p<=lastX+Shape.DEFAULT_RADIUS*2){
+                int n = random.Next(0, 4);
+                int lastX = -Shape.DEFAULT_RADIUS * 2;
+                int p = 0;
+                for (int i = 0; i < n; i++)
+                {
                     p = random.Next(0, Bounds.Width);
+                    while (p >= lastX && p <= lastX + Shape.DEFAULT_RADIUS * 2)
+                    {
+                        p = random.Next(0, Bounds.Width);
+                    }
+                    Enemies.Add(new Enemy(new Point((Shape.DEFAULT_RADIUS * 2 + p) % Bounds.Width, Bounds.Top - Shape.DEFAULT_RADIUS + i * Shape.DEFAULT_RADIUS * 2)));
+                    lastX = p;
                 }
-                Enemies.Add(new Enemy(new Point((Shape.DEFAULT_RADIUS*2 + p)%Bounds.Width, Bounds.Top-Shape.DEFAULT_RADIUS + i * Shape.DEFAULT_RADIUS * 2)));
-                lastX = p;
+                GenerationFactor = 0;
             }
 
         }
@@ -67,37 +73,40 @@ namespace StarWarsVP
         public void DetectColisions()
         {
             foreach(Enemy e in Enemies){
-                if (e.IsHit(Player))
-                    {
-                        Player.DecreaseLife();
-                        Player.Hit = true;
-                        e.Hit = true;
-                        if (Player.Life == 0)
-                        {
-                            //GAME OVER
-                            Player.Dead = true;
-                        }
-                    }
-                foreach (Bullet b in Bullets)
+                if (!e.Hit)
                 {
-                    if (e.IsHit(b))
+                    if (e.IsHit(Player))
                     {
-                        if (b.Type == BulletType.GREEN)
-                        {
-                            Player.Score++;
-                        }
-                        e.Hit = true;
-                        b.Dead = true;
-                    }
-                    
-                    if(Player.IsHit(b) && BulletType.RED == b.Type){
                         Player.DecreaseLife();
                         Player.Hit = true;
-                        b.Dead = true;
+                        e.Hit = true;
                         if (Player.Life == 0)
                         {
                             //GAME OVER
                             Player.Dead = true;
+                        }
+                    }
+                    foreach (Bullet b in Bullets)
+                    {
+                        if (e.IsHit(b))
+                        {
+                            if (b.Type == BulletType.GREEN)
+                            {
+                                Player.Score++;
+                            }
+                            e.Hit = true;
+                            b.Dead = true;
+                        }
+                    
+                        if(Player.IsHit(b) && BulletType.RED == b.Type){
+                            Player.DecreaseLife();
+                            Player.Hit = true;
+                            b.Dead = true;
+                            if (Player.Life == 0)
+                            {
+                                //GAME OVER
+                                Player.Dead = true;
+                            }
                         }
                     }
                 }
@@ -107,14 +116,18 @@ namespace StarWarsVP
 
         public void Update()
         {
+            GenerateEnemies();
+
             DetectColisions();
-            if (count++ % 20 == 0)
-            {
-                GenerateEnemies();
-            }
 
             UpdateEnemies();
 
+            UpdateBullets();
+            
+        }
+
+        private void UpdateBullets()
+        {
             List<Bullet> AliveBullets = new List<Bullet>();
             foreach (Bullet b in Bullets)
             {
@@ -126,7 +139,6 @@ namespace StarWarsVP
             }
 
             Bullets = AliveBullets;
-            
         }
 
         private void UpdateEnemies()
@@ -170,12 +182,20 @@ namespace StarWarsVP
 
         public void Shoot()
         {
-            Bullets.AddRange(Player.Shoot());
+            if (!Player.Dead)
+            {
+                Bullets.AddRange(Player.Shoot());
+            }
         }
 
         public int GetScore()
         {
             return Player.Score;
+        }
+
+        public bool GameOver()
+        {
+            return Player.Dead;
         }
     }
 }

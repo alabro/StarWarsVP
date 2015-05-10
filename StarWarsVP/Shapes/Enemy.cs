@@ -10,7 +10,7 @@ namespace StarWarsVP
     {
         private Random random;
         private int Dir;
-        private EnemyType Type;
+        //private EnemyType Type;
 
         public Enemy(Point position)
             : base(position)
@@ -26,7 +26,7 @@ namespace StarWarsVP
             {
                 int newVel = random.Next(0, 11);
                 VelocityX = newVel;
-                if (random.Next(0, 100) < 10)
+                if (random.Next(0, 100) < 1)
                 {
                     Dir = -Dir;
                 }
@@ -45,7 +45,10 @@ namespace StarWarsVP
                 {
                     Position = new Point(Position.X + VelocityX * Dir, Position.Y + VelocityY);
                 }
-                Position = new Point(Position.X, Position.Y + VelocityY);
+                else
+                {
+                    Position = new Point(Position.X, Position.Y + VelocityY);
+                }
             }
         }
 

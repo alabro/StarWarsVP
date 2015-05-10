@@ -27,6 +27,8 @@ namespace StarWarsVP
             Fighter.Add(Resources.fighter3);
             Fighter.Add(Resources.fighter4);
             Fighter.Add(Resources.fighter5);
+            Fighter.Add(Resources.fighter6);
+
 
             Explosion.Add(Resources.e1);
             Explosion.Add(Resources.e2);
@@ -44,6 +46,7 @@ namespace StarWarsVP
             Bullets.Add(Resources.GreenLaser);
 
             Imperial.Add(Resources.imperialFighter);
+
 
             DoneLoading = true;
         }

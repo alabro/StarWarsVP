@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace StarWarsVP
 {
-    public abstract class Shape : Sprites
+    public abstract class Shape
     {
 
         private readonly int VELOCITY = 20;

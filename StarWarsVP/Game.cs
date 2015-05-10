@@ -18,6 +18,7 @@ namespace StarWarsVP
         int time;
         static readonly int TIMER_INTERVAL = 40;
         public SpriteList Sprites;
+        private int ttl;
 
 
         public Game()
@@ -29,10 +30,11 @@ namespace StarWarsVP
 
         public void NewGame()
         {
-            lblTime.Text = "00:00";
-            time = 0;
-            
             Scene = new Scene(pnlScene.DisplayRectangle);
+            lblTime.Text = "00:00";
+            pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = true;
+            time = 0;
+            ttl = 20;
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = TIMER_INTERVAL;
@@ -41,10 +43,31 @@ namespace StarWarsVP
 
         void timer_Tick(object sender, EventArgs e)
         {
-            time++;
-            //lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
             Scene.Update();
-            lblTime.Text = string.Format("{0}", Scene.timeto());
+            time++;
+            lblScore.Text = string.Format("Score : {0}", Scene.GetScore());
+            lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
+            if (Scene.GameOver())
+            {
+                if (ttl-- == 0)
+                {
+                    timer.Stop();
+                }
+
+            }
+
+            switch (Scene.Life())
+            {
+                case 2: 
+                    pbHeart3.Visible = false; 
+                    break;
+                case 1:
+                    pbHeart2.Visible = false;
+                    break;
+                case 0:
+                    pbHeart1.Visible = false;
+                    break;
+            }
             pnlScene.Invalidate();
         }
 
@@ -90,10 +113,7 @@ namespace StarWarsVP
             pnlHighScores.Visible = false;
         }
 
-        private void btnSound_Click(object sender, EventArgs e)
-        {
-            //todo toggle sound
-        }
+        
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
