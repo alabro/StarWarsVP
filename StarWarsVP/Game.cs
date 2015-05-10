@@ -47,32 +47,35 @@ namespace StarWarsVP
 
         void timer_Tick(object sender, EventArgs e)
         {
-            Scene.Update();
-            time++;
-            lblScore.Text = string.Format("Score : {0}", Scene.GetScore());
-            lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
-            if (Scene.GameOver())
+            if (Scene != null)
             {
-                if (ttl-- == 0)
+                Scene.Update();
+                time++;
+                lblScore.Text = string.Format("Score : {0}", Scene.GetScore());
+                lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
+                if (Scene.GameOver())
                 {
-                    timer.Stop();
+                    if (ttl-- == 0)
+                    {
+                        timer.Stop();
+                    }
+
                 }
 
+                switch (Scene.Life())
+                {
+                    case 2: 
+                        pbHeart3.Visible = false; 
+                        break;
+                    case 1:
+                        pbHeart2.Visible = false;
+                        break;
+                    case 0:
+                        pbHeart1.Visible = false;
+                        break;
+                }
+                pnlScene.Invalidate();
             }
-
-            switch (Scene.Life())
-            {
-                case 2: 
-                    pbHeart3.Visible = false; 
-                    break;
-                case 1:
-                    pbHeart2.Visible = false;
-                    break;
-                case 0:
-                    pbHeart1.Visible = false;
-                    break;
-            }
-            pnlScene.Invalidate();
         }
 
 
@@ -87,6 +90,7 @@ namespace StarWarsVP
         {
             if (Sprites.DoneLoading)
             {
+                btnRestart.Visible = true;
                 pnlScene.Visible = true;
                 ToggleViews();
                 NewGame();
@@ -96,6 +100,7 @@ namespace StarWarsVP
         private void btnHighScores_Click(object sender, EventArgs e)
         {
             ToggleViews();
+            btnRestart.Visible = false;
             pnlHighScores.Visible = true;
         }
 
@@ -107,12 +112,16 @@ namespace StarWarsVP
         private void btnBack_Click(object sender, EventArgs e)
         {
             //TODO SAVE SCORE
-            Theme.Stop();
+            if (Theme != null)
+            {
+                Theme.Stop();
+            }
             ToggleViews();
             if (timer != null)
             {
                 timer.Stop();
             }
+            btnRestart.Visible = false;
             Scene = null;
             pnlScene.Visible = false;
             pnlHighScores.Visible = false;
@@ -124,16 +133,7 @@ namespace StarWarsVP
         {
             if (Scene != null)
             {
-                switch (e.KeyCode)
-                {
-                    case Keys.Left:
-                        Scene.Move(Direction.LEFT);
-                        break;
-
-                    case Keys.Right:
-                        Scene.Move(Direction.RIGHT);
-                        break;
-                }
+                
 
                 if (e.KeyCode == Keys.D)
                 {
@@ -148,7 +148,27 @@ namespace StarWarsVP
             Scene.Draw(e.Graphics);
         }
 
-        
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            //TODO SAVE SCORE
+            timer.Stop();
+            NewGame();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Left:
+                    Scene.Move(Direction.LEFT);
+                    break;
+
+                case Keys.Right:
+                    Scene.Move(Direction.RIGHT);
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         
 
     }

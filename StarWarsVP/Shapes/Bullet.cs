@@ -16,7 +16,7 @@ namespace StarWarsVP
         {
             Type = type;
             VelocityY = (type == BulletType.GREEN ? -VelocityY : +VelocityY);
-            Radius = DEFAULT_RADIUS / 2;
+            Radius = DEFAULT_RADIUS/2;
         }
 
         public override void Move(Direction Direction)
@@ -32,7 +32,7 @@ namespace StarWarsVP
             {
                 i = SpriteList.Instance.Bullets[1];
             }
-            g.DrawImage(i, Position.X + Radius, Position.Y + Radius, Radius * 2, Radius*2);
+            g.DrawImage(i, Position.X + Radius, Position.Y + Radius, Radius*2, Radius*2);
         }
 
     }

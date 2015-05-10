@@ -9,7 +9,6 @@ namespace StarWarsVP
     public class Enemy : Shape, Armed
     {
         private Random random;
-        private int Dir;
         //private EnemyType Type;
 
         public Enemy(Point position)
@@ -17,38 +16,30 @@ namespace StarWarsVP
         {
             random = new Random();
             VelocityY = random.Next(4,6);
-            Dir = random.Next() % 2 == 0 ? 1 : -1;
+            VelocityX = DateTime.Now.Millisecond % 2 == 0 ? random.Next(1, 6) : -random.Next(1, 6);
         }
 
         public override void Move(Direction direction)
         {
             if (!Hit)
             {
-                int newVel = random.Next(0, 11);
-                VelocityX = newVel;
-                if (random.Next() < 100)
-                {
-                    Dir = -Dir;
-                }
+                int L = Scene.Bounds.Left;
+                int R = Scene.Bounds.Right;
 
-                if (Position.X - VelocityX * Dir <= Scene.Bounds.Left + 40)
+                if (Position.X + VelocityX <= L || Position.X + VelocityX >= R)
                 {
-                    Dir = -Dir;
-                }
-
-                if (Position.X + VelocityX * Dir >= Scene.Bounds.Right - 40)
-                {
-                    Dir = -Dir;
-                }
-
-                if (Position.X + VelocityX * Dir >= Scene.Bounds.Left || Position.X + VelocityX * Dir <= Scene.Bounds.Right)
-                {
-                    Position = new Point(Position.X + VelocityX * Dir, Position.Y + VelocityY);
+                    VelocityX = -VelocityX;
                 }
                 else
                 {
-                    Position = new Point(Position.X, Position.Y + VelocityY);
+                    if (random.Next() < 200)
+                    {
+                        int newVel = random.Next(1, 11);
+                        VelocityX = VelocityX>0? -newVel:newVel;
+                    }
                 }
+
+                Position = new Point(Position.X + VelocityX, Position.Y + VelocityY);
             }
         }
 
@@ -71,7 +62,7 @@ namespace StarWarsVP
                 }
                 i = SpriteList.Instance.Explosion[timeToDie];
             }
-            g.DrawImage(i,Position.X + DEFAULT_RADIUS+DEFAULT_RADIUS/10,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
+            g.DrawImage(i,Position.X + DEFAULT_RADIUS,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
         }
 
 

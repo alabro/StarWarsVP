@@ -11,7 +11,7 @@ namespace StarWarsVP
     {
 
         private readonly int VELOCITY = 20;
-        public static int DEFAULT_RADIUS = 100;
+        public static int DEFAULT_RADIUS = 200;
         protected int Radius;
         public Point Position { get; set; }
         public int VelocityX { get; set; }
@@ -37,7 +37,9 @@ namespace StarWarsVP
 
         public bool IsHit(Shape s)
         {
-            return ((Position.X - s.Position.X) * (Position.X - s.Position.X) + (Position.Y - s.Position.Y) * (Position.Y - s.Position.Y) <= Radius * Radius);
+            int xx = (Position.X + Radius - s.Position.X + s.Radius) * (Position.X + Radius - s.Position.X + s.Radius);
+            int yy = (Position.Y + Radius - s.Position.Y + s.Radius) * (Position.Y + Radius - s.Position.Y + s.Radius);
+            return xx + yy <= Radius * Radius + Radius*1.5;
         }
 
 

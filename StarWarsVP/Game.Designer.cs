@@ -35,6 +35,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.pnlOptions = new System.Windows.Forms.Panel();
+            this.btnRestart = new System.Windows.Forms.Button();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
             this.pnlHighScores = new System.Windows.Forms.Panel();
             this.pnlScene = new StarWarsVP.Game.PanelDoubleBuffered();
@@ -113,12 +114,24 @@
             // 
             this.pnlOptions.BackColor = System.Drawing.Color.Gold;
             this.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlOptions.Controls.Add(this.btnRestart);
             this.pnlOptions.Controls.Add(this.btnBack);
             this.pnlOptions.Location = new System.Drawing.Point(-8, 517);
             this.pnlOptions.Name = "pnlOptions";
             this.pnlOptions.Size = new System.Drawing.Size(400, 44);
             this.pnlOptions.TabIndex = 6;
             this.pnlOptions.Visible = false;
+            // 
+            // btnRestart
+            // 
+            this.btnRestart.BackColor = System.Drawing.Color.Transparent;
+            this.btnRestart.Image = global::StarWarsVP.Properties.Resources.NewGame1;
+            this.btnRestart.Location = new System.Drawing.Point(149, 5);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(99, 30);
+            this.btnRestart.TabIndex = 5;
+            this.btnRestart.UseVisualStyleBackColor = false;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
             // pnlMainMenu
             // 
@@ -275,6 +288,7 @@
         private System.Windows.Forms.PictureBox pbHeart3;
         private System.Windows.Forms.PictureBox pbHeart2;
         private System.Windows.Forms.PictureBox pbHeart1;
+        private System.Windows.Forms.Button btnRestart;
     
         public class PanelDoubleBuffered : System.Windows.Forms.Panel
         {

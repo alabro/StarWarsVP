@@ -25,8 +25,8 @@ namespace StarWarsVP
         {
 
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
-            Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS, Rectangle.Height);
-            PLAYER_Y = Bounds.Bottom - 50;
+            Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS*2, Rectangle.Height);
+            PLAYER_Y = Bounds.Bottom - Shape.DEFAULT_RADIUS;
             Player = new Player(new Point(Bounds.Left + Bounds.Width / 2 - 15, Bounds.Bottom - Shape.DEFAULT_RADIUS*5));
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
