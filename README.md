@@ -18,7 +18,7 @@ StarWars
 Методот Move(Direction direction) од класата Scene, има функција ако не се погодени леталата да ги движи објектите во одредена насока. Од лева страна на мапата до плус 40, а од десна страна до минус 40.
 
 
-public override void Move(Direction direction)
+        public override void Move(Direction direction)
         {
             if (!Hit)
             {
