@@ -15,7 +15,33 @@ StarWars
 
   ![](http://i.imgur.com/8kXxWVY.png)
 
-Методот Move(Direction direction) од класата Scene, има функција ако не се погодени леталата да ги движи објектите во одредена насока. Од лева страна на мапата до плус 40, а од десна страна до минус 40 од вкупна големина на 100.
+Методот Move(Direction direction) од класата Scene, има функција ако не се погодени леталата да ги движи објектите во одредена насока. Од лева страна на мапата до плус 40, а од десна страна до минус 40.
+
+
+public override void Move(Direction direction)
+        {
+            if (!Hit)
+            {
+                int L = Scene.Bounds.Left;
+                int R = Scene.Bounds.Right;
+
+                if (Position.X + VelocityX <= L || Position.X + VelocityX >= R)
+                {
+                    VelocityX = -VelocityX;
+                }
+                else
+                {
+                    if (random.Next() < 200)
+                    {
+                        int newVel = random.Next(1, 11);
+                        VelocityX = VelocityX>0? -newVel:newVel;
+                    }
+                }
+
+                Position = new Point(Position.X + VelocityX, Position.Y + VelocityY);
+            }
+        }
+
 
 Контроли за игра:
 
