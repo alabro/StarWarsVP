@@ -47,11 +47,11 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
             this.pnlHighScores.SuspendLayout();
+            this.pnlScene.SuspendLayout();
             this.pnlScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart2)).BeginInit();
@@ -139,7 +139,6 @@
             // pnlMainMenu
             // 
             this.pnlMainMenu.BackColor = System.Drawing.Color.Transparent;
-            this.pnlMainMenu.Controls.Add(this.pnlHighScores);
             this.pnlMainMenu.Controls.Add(this.btnExit);
             this.pnlMainMenu.Controls.Add(this.btnNewGame);
             this.pnlMainMenu.Controls.Add(this.btnHighScores);
@@ -151,9 +150,8 @@
             // 
             // pnlHighScores
             // 
-            this.pnlHighScores.Controls.Add(this.listBox1);
             this.pnlHighScores.Controls.Add(this.lblScores);
-            this.pnlHighScores.Location = new System.Drawing.Point(0, 22);
+            this.pnlHighScores.Location = new System.Drawing.Point(13, 11);
             this.pnlHighScores.Name = "pnlHighScores";
             this.pnlHighScores.Size = new System.Drawing.Size(354, 474);
             this.pnlHighScores.TabIndex = 5;
@@ -254,14 +252,6 @@
             this.lblTitle.Size = new System.Drawing.Size(0, 13);
             this.lblTitle.TabIndex = 0;
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(56, 132);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(258, 290);
-            this.listBox1.TabIndex = 1;
-            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,6 +263,7 @@
             this.Controls.Add(this.pnlOptions);
             this.Controls.Add(this.pnlMainMenu);
             this.Controls.Add(this.pnlScene);
+            this.Controls.Add(this.pnlHighScores);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -287,6 +278,7 @@
             this.pnlMainMenu.ResumeLayout(false);
             this.pnlHighScores.ResumeLayout(false);
             this.pnlHighScores.PerformLayout();
+            this.pnlScene.ResumeLayout(false);
             this.pnlScore.ResumeLayout(false);
             this.pnlScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).EndInit();
@@ -316,7 +308,6 @@
         private System.Windows.Forms.PictureBox pbHeart1;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Label lblScores;
-        private System.Windows.Forms.ListBox listBox1;
     
         public class PanelDoubleBuffered : System.Windows.Forms.Panel
         {

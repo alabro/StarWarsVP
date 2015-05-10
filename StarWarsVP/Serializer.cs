@@ -62,7 +62,7 @@ namespace StarWarsVP
             {
                 if (i < HighScores.Count - 1)
                 {
-                    sb.Append(string.Format("{0}. {1}", (i + 1), HighScores[i]));
+                    sb.Append(string.Format("{0}. {1}", (i + 1), "ANDREJ 3131");
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace StarWarsVP
         public static void SaveScores()
         {
             HighScores.Sort(new PlayerComparator());
-            WriteToBinaryFile<List<PlayerScore>>(HighScores);
+            WriteToBinaryFile<List<PlayerScore>>(HighScores.GetRange(0,10));
         }
 
         public List<PlayerScore> GetScores()

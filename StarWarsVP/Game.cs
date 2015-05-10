@@ -30,10 +30,7 @@ namespace StarWarsVP
             this.DoubleBuffered = true;
             Sprites = SpriteList.GetSprites();
             Scores = Serializer.GetSerializer();
-            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
-            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
-            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
-            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
+            Serializer.AddPlayer(new PlayerScore("Andrej", 20000));
             Serializer.SaveScores();
         }
 
@@ -107,8 +104,10 @@ namespace StarWarsVP
         private void btnHighScores_Click(object sender, EventArgs e)
         {
             ToggleViews();
+            pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = false;
+            lblScore.Text = "";
+            lblTime.Text = "";
             btnRestart.Visible = false;
-            pnlHighScores.Visible = true;
             pnlHighScores.Visible = true;
             lblScores.Text = Serializer.GetString();
             lblScores.Visible = true;
