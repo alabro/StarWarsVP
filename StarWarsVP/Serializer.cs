@@ -57,12 +57,13 @@ namespace StarWarsVP
 
         public static string GetString()
         {
+            HighScores.Sort(new PlayerComparator());
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 10; i++)
             {
                 if (i < HighScores.Count - 1)
                 {
-                    sb.Append(string.Format("{0}. {1}", (i + 1), "ANDREJ 3131");
+                    sb.Append(string.Format("{0}. {1}", (i + 1), HighScores[i].ToString()));
                 }
                 else
                 {
@@ -77,17 +78,25 @@ namespace StarWarsVP
         public static void AddPlayer(PlayerScore score)
         {
             HighScores.Add(score);
+            HighScores.Sort(new PlayerComparator());
         }
 
         public static void SaveScores()
         {
             HighScores.Sort(new PlayerComparator());
-            WriteToBinaryFile<List<PlayerScore>>(HighScores.GetRange(0,10));
+            int range = HighScores.Count>10?10:HighScores.Count;
+            WriteToBinaryFile<List<PlayerScore>>(HighScores.GetRange(0,range));
         }
 
         public List<PlayerScore> GetScores()
         {
             return HighScores;
+        }
+
+        public static void ClearScores()
+        {
+            HighScores.Clear();
+            WriteToBinaryFile<List<PlayerScore>>(new List<PlayerScore>());
         }
 
     }

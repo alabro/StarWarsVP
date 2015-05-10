@@ -29,6 +29,7 @@ namespace StarWarsVP
         private void btnDone_Click(object sender, EventArgs e)
         {
             PlayerScore = new PlayerScore(tbPlayerName.Text, Score);
+            Serializer.AddPlayer(PlayerScore);
             this.Close();
         }
 

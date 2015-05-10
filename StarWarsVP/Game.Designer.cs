@@ -51,7 +51,6 @@
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
             this.pnlHighScores.SuspendLayout();
-            this.pnlScene.SuspendLayout();
             this.pnlScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart2)).BeginInit();
@@ -150,6 +149,7 @@
             // 
             // pnlHighScores
             // 
+            this.pnlHighScores.BackColor = System.Drawing.Color.Transparent;
             this.pnlHighScores.Controls.Add(this.lblScores);
             this.pnlHighScores.Location = new System.Drawing.Point(13, 11);
             this.pnlHighScores.Name = "pnlHighScores";
@@ -278,7 +278,6 @@
             this.pnlMainMenu.ResumeLayout(false);
             this.pnlHighScores.ResumeLayout(false);
             this.pnlHighScores.PerformLayout();
-            this.pnlScene.ResumeLayout(false);
             this.pnlScore.ResumeLayout(false);
             this.pnlScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).EndInit();

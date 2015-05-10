@@ -125,10 +125,6 @@ namespace StarWarsVP
             if (End == null)
             {
                 End = new GameOver(GetScore());
-                if (End.DialogResult == System.Windows.Forms.DialogResult.Yes)
-                {
-                    Serializer.AddPlayer(End.PlayerScore);
-                }
                 End.Show();
             }
         }

@@ -29,9 +29,8 @@ namespace StarWarsVP
             InitializeComponent();
             this.DoubleBuffered = true;
             Sprites = SpriteList.GetSprites();
-            Scores = Serializer.GetSerializer();
-            Serializer.AddPlayer(new PlayerScore("Andrej", 20000));
-            Serializer.SaveScores();
+            Serializer.GetSerializer();
+            //Serializer.ClearScores();
         }
 
         public void NewGame()

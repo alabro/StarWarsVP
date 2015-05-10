@@ -60,6 +60,7 @@
             // 
             this.tbPlayerName.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPlayerName.Location = new System.Drawing.Point(13, 139);
+            this.tbPlayerName.MaxLength = 10;
             this.tbPlayerName.Name = "tbPlayerName";
             this.tbPlayerName.Size = new System.Drawing.Size(259, 31);
             this.tbPlayerName.TabIndex = 2;
