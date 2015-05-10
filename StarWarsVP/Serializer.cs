@@ -12,8 +12,9 @@ namespace StarWarsVP
     public class Serializer
     {
 
+        private static List<PlayerScore> HighScores;
 
-        private static void BinarySerialize(ArrayList list)
+        private static void BinarySerialize(List<PlayerScore> list)
         {
             using (FileStream str = File.Create("Scores.bin"))
             {
@@ -22,27 +23,50 @@ namespace StarWarsVP
             }
         }
 
-        private static ArrayList BinaryDeserialize()
+        private static List<PlayerScore> BinaryDeserialize()
         {
-            ArrayList people = null;
-            using (FileStream str = File.OpenRead("Scores.bin"))
+            List<PlayerScore> people = new List<PlayerScore>();
+            if (File.Exists("Scores.bin"))
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                people = (ArrayList)bf.Deserialize(str);
+                using (FileStream str = File.OpenRead("Scores.bin"))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    people = bf.Deserialize(str) as List<PlayerScore>;
+                }
             }
             return people;
         }
 
-        public static Serializer Instance;
+        private static Serializer Instance;
 
-        public Serializer GetSerializer()
+        public static Serializer GetSerializer()
         {
             if (Instance == null)
             {
                 Instance = new Serializer();
+                if (File.Exists("Scores.bin"))
+                {
+                    File.Create("Scores.bin");
+                }
+                HighScores = BinaryDeserialize();
             }
 
             return Instance;
         }
+
+        public static List<PlayerScore> GetScores(){
+            return HighScores;
+        }
+
+        public static void AddPlayer(PlayerScore score)
+        {
+            HighScores.Add(score);
+        }
+
+        public static void SaveScores()
+        {
+            BinarySerialize(HighScores);
+        }
+
     }
 }

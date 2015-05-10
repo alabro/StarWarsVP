@@ -19,8 +19,9 @@ namespace StarWarsVP
         int time;
         static readonly int TIMER_INTERVAL = 40;
         public SpriteList Sprites;
-        private int ttl;
+        public Serializer Scores;
         private SoundPlayer Theme;
+        private int TimeToLive;
 
 
         public Game()
@@ -28,6 +29,11 @@ namespace StarWarsVP
             InitializeComponent();
             this.DoubleBuffered = true;
             Sprites = SpriteList.GetSprites();
+            Scores = Serializer.GetSerializer();
+            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
+            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
+            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
+            Serializer.AddPlayer(new PlayerScore("LABRO", 100));
         }
 
         public void NewGame()
@@ -38,7 +44,7 @@ namespace StarWarsVP
             lblTime.Text = "00:00";
             pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = true;
             time = 0;
-            ttl = 20;
+            TimeToLive = 20;
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = TIMER_INTERVAL;
@@ -55,7 +61,7 @@ namespace StarWarsVP
                 lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
                 if (Scene.GameOver())
                 {
-                    if (ttl-- == 0)
+                    if (TimeToLive-- == 0)
                     {
                         timer.Stop();
                     }
@@ -102,6 +108,15 @@ namespace StarWarsVP
             ToggleViews();
             btnRestart.Visible = false;
             pnlHighScores.Visible = true;
+            pnlHighScores.Visible = true;
+            StringBuilder sb = new StringBuilder();
+            List<PlayerScore> list = Serializer.GetScores();
+            for (int i = 0; i < list.Count; i++)
+            {
+                sb.Append(string.Format("{0}. {1}", (i + 1), list[i]));
+            }
+            lblScores.Visible = true;
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -157,15 +172,18 @@ namespace StarWarsVP
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            switch (keyData)
+            if (Scene != null)
             {
-                case Keys.Left:
-                    Scene.Move(Direction.LEFT);
-                    break;
+                switch (keyData)
+                {
+                    case Keys.Left:
+                        Scene.Move(Direction.LEFT);
+                        break;
 
-                case Keys.Right:
-                    Scene.Move(Direction.RIGHT);
-                    break;
+                    case Keys.Right:
+                        Scene.Move(Direction.RIGHT);
+                        break;
+                }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

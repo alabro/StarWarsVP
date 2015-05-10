@@ -46,9 +46,11 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblScores = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlOptions.SuspendLayout();
             this.pnlMainMenu.SuspendLayout();
+            this.pnlHighScores.SuspendLayout();
             this.pnlScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart2)).BeginInit();
@@ -148,6 +150,7 @@
             // 
             // pnlHighScores
             // 
+            this.pnlHighScores.Controls.Add(this.lblScores);
             this.pnlHighScores.Location = new System.Drawing.Point(0, 22);
             this.pnlHighScores.Name = "pnlHighScores";
             this.pnlHighScores.Size = new System.Drawing.Size(354, 474);
@@ -238,6 +241,17 @@
             this.lblTitle.Size = new System.Drawing.Size(0, 13);
             this.lblTitle.TabIndex = 0;
             // 
+            // lblScores
+            // 
+            this.lblScores.AutoSize = true;
+            this.lblScores.Font = new System.Drawing.Font("Impact", 12F);
+            this.lblScores.ForeColor = System.Drawing.Color.Gold;
+            this.lblScores.Location = new System.Drawing.Point(67, 32);
+            this.lblScores.Name = "lblScores";
+            this.lblScores.Size = new System.Drawing.Size(47, 20);
+            this.lblScores.TabIndex = 0;
+            this.lblScores.Text = "label1";
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,6 +275,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.pnlOptions.ResumeLayout(false);
             this.pnlMainMenu.ResumeLayout(false);
+            this.pnlHighScores.ResumeLayout(false);
+            this.pnlHighScores.PerformLayout();
             this.pnlScore.ResumeLayout(false);
             this.pnlScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeart3)).EndInit();
@@ -289,6 +305,7 @@
         private System.Windows.Forms.PictureBox pbHeart2;
         private System.Windows.Forms.PictureBox pbHeart1;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Label lblScores;
     
         public class PanelDoubleBuffered : System.Windows.Forms.Panel
         {
