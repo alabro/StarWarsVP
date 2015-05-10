@@ -89,7 +89,7 @@ namespace StarWarsVP
                             Player.Dead = true;
                         }
                     }
-                    if (Bullets.Count != 0)
+                    if (Bullets!=null && Bullets.Count != 0)
                     {
                         foreach (Bullet b in Bullets)
                         {
