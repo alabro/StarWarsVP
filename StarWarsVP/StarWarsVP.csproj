@@ -105,9 +105,9 @@
     <EmbeddedResource Include="Game.resx">
       <DependentUpon>Game.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameOver.resx">
+    <Compile Include="GameOver.resx">
       <DependentUpon>GameOver.cs</DependentUpon>
-    </EmbeddedResource>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Buttons\NewGame1.png" />
+    <None Include="Resources\Icon1.ico" />
     <Content Include="Resources\Sounds\blaster.wav" />
     <Content Include="Resources\Sounds\imperial.wav" />
     <Content Include="Resources\Sounds\swtheme.wav" />
