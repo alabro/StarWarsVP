@@ -26,7 +26,7 @@ namespace StarWarsVP
             {
                 int newVel = random.Next(0, 11);
                 VelocityX = newVel;
-                if (random.Next(0, 100) < 1)
+                if (random.Next() < 100)
                 {
                     Dir = -Dir;
                 }

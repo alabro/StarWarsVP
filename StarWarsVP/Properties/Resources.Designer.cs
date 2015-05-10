@@ -81,6 +81,15 @@ namespace StarWarsVP.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream blaster {
+            get {
+                return ResourceManager.GetStream("blaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap e1 {
@@ -301,6 +310,15 @@ namespace StarWarsVP.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream imperial {
+            get {
+                return ResourceManager.GetStream("imperial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap imperialFighter {
@@ -347,6 +365,15 @@ namespace StarWarsVP.Properties {
             get {
                 object obj = ResourceManager.GetObject("stock_volume2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream swtheme {
+            get {
+                return ResourceManager.GetStream("swtheme", resourceCulture);
             }
         }
     }

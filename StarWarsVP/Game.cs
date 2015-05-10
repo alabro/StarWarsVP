@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace StarWarsVP
         static readonly int TIMER_INTERVAL = 40;
         public SpriteList Sprites;
         private int ttl;
+        private SoundPlayer Theme;
 
 
         public Game()
@@ -31,6 +33,8 @@ namespace StarWarsVP
         public void NewGame()
         {
             Scene = new Scene(pnlScene.DisplayRectangle);
+            Theme = new SoundPlayer(Resources.imperial);
+            Theme.PlayLooping();
             lblTime.Text = "00:00";
             pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = true;
             time = 0;
@@ -103,6 +107,7 @@ namespace StarWarsVP
         private void btnBack_Click(object sender, EventArgs e)
         {
             //TODO SAVE SCORE
+            Theme.Stop();
             ToggleViews();
             if (timer != null)
             {
