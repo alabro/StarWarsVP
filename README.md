@@ -32,7 +32,7 @@ StarWars
                 }
                 else
                 {
-                    if (random.Next() < 200)
+                    if (random.Next(0,100) < 20)
                     {
                         int newVel = random.Next(1, 11);
                         VelocityX = VelocityX>0? -newVel:newVel;
