@@ -15,6 +15,23 @@ namespace StarWarsVP
         private static List<PlayerScore> HighScores;
         private static readonly string filePath = "HighScores.bin";
 
+        private static Serializer Instance;
+
+        public static Serializer GetSerializer()
+        {
+            if (Instance == null)
+            {
+                Instance = new Serializer();
+                HighScores = ReadFromBinaryFile<List<PlayerScore>>();
+                if (HighScores == null)
+                {
+                    HighScores = new List<PlayerScore>();
+                }
+            }
+            return Instance;
+        }
+
+
         public static void WriteToBinaryFile<T>(T objectToWrite, bool append = false)
         {
             using (Stream stream = File.Open(filePath, append ? FileMode.Append : FileMode.Create))
@@ -37,21 +54,7 @@ namespace StarWarsVP
             return default(T);
         }
 
-        private static Serializer Instance;
-
-        public static Serializer GetSerializer()
-        {
-            if (Instance == null)
-            {
-                Instance = new Serializer();
-                HighScores = ReadFromBinaryFile<List<PlayerScore>>();
-                if (HighScores == null)
-                {
-                    HighScores = new List<PlayerScore>();
-                }
-            }
-            return Instance;
-        }
+        
 
 
         public static string GetString()

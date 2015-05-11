@@ -22,25 +22,28 @@ namespace StarWarsVP
             Life = 3;
         }
 
-        public override void Move(Direction direction)
+        public override void Move(Direction direction,Rectangle Bounds)
         {
-            int newX = 0;
+            if(Life!=0){
+                int L = Bounds.Left;
+                int R = Bounds.Right;
+                switch (direction)
+                {
+                    case Direction.LEFT:
+                        VelocityX = -Radius;
+                        break;
 
-            switch (direction)
-            {
-                case Direction.LEFT:
-                    newX = Position.X - VelocityX;
-                    break;
-
-                case Direction.RIGHT:
-                    newX = Position.X + VelocityX;
-                    break;
-            }
-
-            if (newX <= Scene.Bounds.Right-40 && newX >= Scene.Bounds.Left)
-            {
-                Position = new Point(newX, Position.Y);
+                    case Direction.RIGHT:
+                        VelocityX = Radius;
+                        break;
+                }
+                if ((Position.X - Radius + VelocityX < L) || (Position.X + Radius + VelocityX > R))
+                {
+                    VelocityX = 0;
+                }
+                Position = new Point(Position.X + VelocityX, Position.Y);
                 CenterGuns();
+
             }
 
         }
@@ -48,35 +51,42 @@ namespace StarWarsVP
 
         public void CenterGuns()
         {
-            LeftGun = new Point(Position.X, Position.Y + DEFAULT_RADIUS/2);
-            RightGun = new Point(Position.X + DEFAULT_RADIUS * 2, Position.Y + DEFAULT_RADIUS / 2);
+            LeftGun = new Point(Position.X - Radius, Position.Y-Radius);
+            RightGun = new Point(Position.X + Radius, Position.Y-Radius);
         }
 
         public override void Draw(Graphics g)
         {
+            //Debuging
+            //Pen p = new Pen(Color.Green);
+            //g.DrawEllipse(p, Position.X - Radius, Position.Y - Radius, Radius * 2, Radius * 2);
+            //g.FillEllipse(new SolidBrush(Color.Red), Position.X - 5, Position.Y - 5, 10, 10);
+            //p.Dispose();
+
             if (Hit)
             {
-                timeToDie++;
+                TTD++;
             }
-            if (timeToDie == 10)
+            if (TTD == 10)
             {
-                timeToDie = 0;
+                TTD = 0;
                 Hit = false;
             }
-            g.DrawImage(GetImage(), Position.X + DEFAULT_RADIUS, Position.Y + DEFAULT_RADIUS, DEFAULT_RADIUS * 2, DEFAULT_RADIUS * 2);
+            g.DrawImage(GetImage(), Position.X - Radius, Position.Y - Radius, Radius * 2, Radius * 2);
         }
 
         public void DecreaseLife()
         {
             if (!Hit)
             {
+                //Comment for debuging
                 Life--;
             }
             else
             {
-                if (timeToDie == 10)
+                if (TTD == 10)
                 {
-                    timeToDie = 0;
+                    TTD = 0;
                     Hit = false;
                 }
 
@@ -85,7 +95,6 @@ namespace StarWarsVP
                     Dead = true;
                 }
             }
-
 
         }
 
@@ -105,30 +114,25 @@ namespace StarWarsVP
                     i = DateTime.Now.Millisecond % 2 == 0 ? SpriteList.Instance.Fighter[4] : SpriteList.Instance.Fighter[5];
                     break;
                 default:
-                    i = SpriteList.Instance.Explosion[timeToDie++%10];
+                    i = SpriteList.Instance.Explosion[TTD++%10];
                     break;
             }
-            if (Hit && timeToDie%3==0 && !Dead)
+            if (Hit && TTD%3==0 && Life!=0)
             {
                 i = SpriteList.Instance.Fighter[6];
             }
-
             return i;
         }
-
-
 
         public List<Bullet> Shoot()
         {
             List<Bullet> Bullets = new List<Bullet>();
-            Bullets.Add(new Bullet(LeftGun, BulletType.GREEN));
-            Bullets.Add(new Bullet(RightGun, BulletType.GREEN));
+            if (Life!=0)
+            {
+                Bullets.Add(new Bullet(LeftGun, BulletType.GREEN));
+                Bullets.Add(new Bullet(RightGun, BulletType.GREEN));
+            }
             return Bullets;
-        }
-
-        public int getTime()
-        {
-            return timeToDie;
         }
 
     }

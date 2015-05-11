@@ -12,30 +12,31 @@ namespace StarWarsVP
 
     public class Scene
     {
-        private int PLAYER_Y;
-        public static Rectangle Bounds;
+        private static readonly int GENERATION_FACTOR = 20;
+        private static Rectangle Bounds;
+        private int Generation;
         private List<Enemy> Enemies;
         private Player Player;
         private List<Bullet> Bullets;
         private Random random;
-        private int GenerationFactor;
         private GameOver End;
-
 
         public Scene(Rectangle Rectangle)
         {
             Shape.DEFAULT_RADIUS = Rectangle.Width / 20;
-            Bounds = new Rectangle(Rectangle.X, Rectangle.Y, Rectangle.Width - Shape.DEFAULT_RADIUS*2, Rectangle.Height);
-            PLAYER_Y = Bounds.Bottom - Shape.DEFAULT_RADIUS;
-            Player = new Player(new Point(Bounds.Left + Bounds.Width / 2 - 15, Bounds.Bottom - Shape.DEFAULT_RADIUS*5));
+            Bounds = new Rectangle(Rectangle.X+Shape.DEFAULT_RADIUS, Rectangle.Y, Rectangle.Width-Shape.DEFAULT_RADIUS*2, Rectangle.Height);
+            Player = new Player(new Point(Bounds.Left + Bounds.Width / 2, Bounds.Bottom - Shape.DEFAULT_RADIUS*2));
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
             random = new Random();
-            GenerationFactor = 0;
+            Generation = 0;
         }
 
         public void Draw(Graphics g)
         {
+            //Debuging
+            //g.DrawRectangle(new Pen(Color.Green), Bounds);
+
             foreach (Enemy e in Enemies)
             {
                 e.Draw(g);
@@ -47,27 +48,29 @@ namespace StarWarsVP
             }
 
             Player.Draw(g);
+
+            
         }
 
         private void GenerateEnemies()
         {
-            GenerationFactor++;
-            if (GenerationFactor % 20 == 0)
+            Generation++;
+            if (Generation % GENERATION_FACTOR == 0)
             {
                 int n = random.Next(0, 4);
-                int lastX = -Shape.DEFAULT_RADIUS * 2;
+                int lastX = 0;
                 int p = 0;
                 for (int i = 0; i < n; i++)
                 {
-                    p = random.Next(0, Bounds.Width);
+                    p = random.Next(Shape.DEFAULT_RADIUS, Bounds.Width-Shape.DEFAULT_RADIUS*4);
                     while (p >= lastX && p <= lastX + Shape.DEFAULT_RADIUS * 2)
                     {
-                        p = random.Next(0, Bounds.Width);
+                        p = random.Next(Shape.DEFAULT_RADIUS, Bounds.Width);
                     }
-                    Enemies.Add(new Enemy(new Point((Shape.DEFAULT_RADIUS * 2 + p) % Bounds.Width, Bounds.Top - Shape.DEFAULT_RADIUS + i * Shape.DEFAULT_RADIUS * 2)));
+                    Enemies.Add(new Enemy(new Point((Shape.DEFAULT_RADIUS * 2 + p),i * Shape.DEFAULT_RADIUS * 2)));
                     lastX = p;
                 }
-                GenerationFactor = 0;
+                Generation = 0;
             }
 
         }
@@ -89,10 +92,8 @@ namespace StarWarsVP
                             Player.Dead = true;
                         }
                     }
-                    if (Bullets!=null && Bullets.Count != 0)
+                    foreach (Bullet b in Bullets)
                     {
-                        foreach (Bullet b in Bullets)
-                        {
                             if (e.IsHit(b))
                             {
                                 if (b.Type == BulletType.GREEN)
@@ -115,7 +116,6 @@ namespace StarWarsVP
                                     Player.Dead = true;
                                 }
                             }
-                        }
                     }
                     
                 }
@@ -148,69 +148,58 @@ namespace StarWarsVP
         {
             if (!Player.Dead)
             {
-                GenerateEnemies();
-
                 DetectColisions();
+
+                UpdateBullets();
 
                 UpdateEnemies();
 
-                UpdateBullets();
+
+                GenerateEnemies();
             }
         }
 
         private void UpdateBullets()
         {
             List<Bullet> AliveBullets = new List<Bullet>();
+
             foreach (Bullet b in Bullets)
             {
-                b.Move(Direction.UP);
-                if (b.Position.Y >= Bounds.Top && b.Position.Y <= Bounds.Bottom && !b.Dead)
+                   
+                if (!b.OutOfBounds(Bounds) && !b.Dead)
                 {
                     AliveBullets.Add(b);
+                    b.Move(Direction.UP,Bounds);
                 }
             }
-
             Bullets = AliveBullets;
         }
 
         private void UpdateEnemies()
         {
             List<Enemy> Alive = new List<Enemy>();
-
             foreach (Enemy e in Enemies)
             {
-                e.Move(Direction.DOWN);
-                if (random.Next(0, 100) < 5)
-                {
-                    if (!e.Hit)
-                    {
-                        Bullets.AddRange(e.Shoot());
-                    }
-                }
-                if (e.Position.Y >= Bounds.Top - Shape.DEFAULT_RADIUS && e.Position.Y <= Bounds.Bottom && !e.Dead)
+                
+                if (!e.OutOfBounds(Bounds) && !e.Dead)
                 {
                     Alive.Add(e);
+                    Bullets.AddRange(e.Shoot());
+                    e.Move(Direction.DOWN,Bounds);
                 }
             }
-
             Enemies = Alive;
         }
 
         public void Move(Direction Direction)
         {
-            Player.Move(Direction);
+            Player.Move(Direction,Bounds);
         }
 
         public int Life()
         {
             return Player.Life;
         }
-
-        public int timeto()
-        {
-            return Player.getTime();
-        }
-
 
         public void Shoot()
         {

@@ -11,12 +11,5 @@ namespace StarWarsVP
     {
         List<Bullet> Shoot();
     }
-    public interface IDrawable
-    {
-        void Draw(Graphics g);
-    }
-    public interface ICollidable
-    {
-        Rectangle GetCollitionRectangle();
-    }
+    
 }

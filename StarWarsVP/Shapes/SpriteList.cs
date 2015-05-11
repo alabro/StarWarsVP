@@ -17,38 +17,44 @@ namespace StarWarsVP
         public List<Bitmap> Imperial;
         public List<Bitmap> Explosion;
         public List<Bitmap> Bullets;
-        public bool DoneLoading;
+        public static bool DoneLoading;
 
         public void LoadSprites()
         {
-            Fighter.Add(Resources.fighter);
-            Fighter.Add(Resources.fighter1);
-            Fighter.Add(Resources.fighter2);
-            Fighter.Add(Resources.fighter3);
-            Fighter.Add(Resources.fighter4);
-            Fighter.Add(Resources.fighter5);
-            Fighter.Add(Resources.fighter6);
+            if (!DoneLoading)
+            {
+                Fighter.Add(Resources.fighter);
+                Fighter.Add(Resources.fighter1);
+                Fighter.Add(Resources.fighter2);
+                Fighter.Add(Resources.fighter3);
+                Fighter.Add(Resources.fighter4);
+                Fighter.Add(Resources.fighter5);
+                Fighter.Add(Resources.fighter6);
 
 
-            Explosion.Add(Resources.e1);
-            Explosion.Add(Resources.e2);
-            Explosion.Add(Resources.e3);
-            Explosion.Add(Resources.e4);
-            Explosion.Add(Resources.e5);
-            Explosion.Add(Resources.e6);
-            Explosion.Add(Resources.e7);
-            Explosion.Add(Resources.e8);
-            Explosion.Add(Resources.e9);
-            Explosion.Add(Resources.e10);
-            Explosion.Add(Resources.e11);
+                Explosion.Add(Resources.e1);
+                Explosion.Add(Resources.e2);
+                Explosion.Add(Resources.e3);
+                Explosion.Add(Resources.e4);
+                Explosion.Add(Resources.e5);
+                Explosion.Add(Resources.e6);
+                Explosion.Add(Resources.e7);
+                Explosion.Add(Resources.e8);
+                Explosion.Add(Resources.e9);
+                Explosion.Add(Resources.e10);
+                Explosion.Add(Resources.e11);
 
-            Bullets.Add(Resources.RedLaser);
-            Bullets.Add(Resources.GreenLaser);
+                Bullets.Add(Resources.RedLaser);
+                Bullets.Add(Resources.GreenLaser);
 
-            Imperial.Add(Resources.imperialFighter);
+                Imperial.Add(Resources.imperialFighter);
+
+                DoneLoading = true;
+
+            }
+            
 
 
-            DoneLoading = true;
         }
 
         public static SpriteList Instance;
@@ -70,5 +76,6 @@ namespace StarWarsVP
             Bullets = new List<Bitmap>();
             LoadSprites();
         }
+
     }
 }

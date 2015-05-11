@@ -15,27 +15,31 @@ namespace StarWarsVP
             : base(position)
         {
             random = new Random();
-            VelocityY = random.Next(4,6);
+            VelocityY = random.Next(6,12);
             VelocityX = DateTime.Now.Millisecond % 2 == 0 ? random.Next(1, 6) : -random.Next(1, 6);
         }
 
-        public override void Move(Direction direction)
+        public override void Move(Direction direction,Rectangle Bounds)
         {
             if (!Hit)
             {
-                int L = Scene.Bounds.Left;
-                int R = Scene.Bounds.Right;
+                int L = Bounds.Left;
+                int R = Bounds.Right;
 
-                if (Position.X + VelocityX <= L || Position.X + VelocityX >= R)
+                if (Position.X-Radius + VelocityX<= L)
                 {
                     VelocityX = -VelocityX;
                 }
+                else if (Position.X+Radius + VelocityX >= R)
+                {
+                    VelocityX = - VelocityX;
+                }
                 else
                 {
-                    if (random.Next() < 200)
+                    if (random.Next(0,100) < 5)
                     {
-                        int newVel = random.Next(1, 11);
-                        VelocityX = VelocityX>0? -newVel:newVel;
+                        int newVel = random.Next(1, 6);
+                        VelocityX = VelocityX > 0 ? -newVel : newVel;
                     }
                 }
                 Position = new Point(Position.X + VelocityX, Position.Y + VelocityY);
@@ -44,6 +48,15 @@ namespace StarWarsVP
 
         public override void Draw(Graphics g)
         {
+            
+            //Debuging
+            //Pen p = new Pen(Color.Green);
+            //g.DrawEllipse(p, Position.X-Radius, Position.Y-Radius, Radius * 2, Radius * 2);
+            //g.FillEllipse(new SolidBrush(Color.Red), Position.X-5, Position.Y-5, 10, 10);
+            //p.Dispose();
+
+
+
             Image i = SpriteList.Instance.Imperial[0];
             if (!Hit)
             {
@@ -54,21 +67,24 @@ namespace StarWarsVP
             }
             else
             {
-                timeToDie++;
-                if (timeToDie == 10)
+                TTD++;
+                if (TTD == 10)
                 {
                     Dead = true;
                 }
-                i = SpriteList.Instance.Explosion[timeToDie%10];
+                i = SpriteList.Instance.Explosion[TTD%10];
             }
-            g.DrawImage(i,Position.X + DEFAULT_RADIUS,Position.Y+DEFAULT_RADIUS,DEFAULT_RADIUS*2,DEFAULT_RADIUS*2);
+            g.DrawImage(i, Position.X - Radius, Position.Y - Radius, Radius * 2, Radius * 2);
         }
 
 
         public List<Bullet> Shoot()
         {
             List<Bullet> Bullets = new List<Bullet>();
-            Bullets.Add(new Bullet(new Point(Position.X + DEFAULT_RADIUS, Position.Y + DEFAULT_RADIUS*2), BulletType.RED));
+            if (!Hit && random.Next(0, 100) < 5)
+            {
+                Bullets.Add(new Bullet(new Point(Position.X + Radius, Position.Y + Radius*2), BulletType.RED));
+            }
             return Bullets; 
         }
     }

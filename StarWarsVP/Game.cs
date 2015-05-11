@@ -19,7 +19,7 @@ namespace StarWarsVP
         int time;
         static readonly int TIMER_INTERVAL = 40;
         public SpriteList Sprites;
-        public Serializer Scores;
+        public Serializer Scores; 
         private SoundPlayer Theme;
         private int TimeToLive;
 
@@ -28,7 +28,7 @@ namespace StarWarsVP
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            Sprites = SpriteList.GetSprites();
+            SpriteList.GetSprites();
             Serializer.GetSerializer();
             //Serializer.ClearScores();
         }
@@ -39,13 +39,13 @@ namespace StarWarsVP
             Scene = new Scene(pnlScene.DisplayRectangle);
             Theme = new SoundPlayer(Resources.imperial);
             Theme.PlayLooping();
-            lblTime.Text = "00:00";
-            pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = true;
             time = 0;
             TimeToLive = 20;
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = TIMER_INTERVAL;
+            
+            UpdateMenu();
             timer.Start();
         }
 
@@ -55,30 +55,36 @@ namespace StarWarsVP
             {
                 Scene.Update();
                 time++;
-                lblScore.Text = string.Format("Score : {0}", Scene.GetScore());
-                lblTime.Text = string.Format("{0:00}:{1:00}", (time/24)/60, (time/24)%60);
+                UpdateMenu();
                 if (Scene.GameOver())
                 {
                     if (TimeToLive-- == 0)
                     {
                         timer.Stop();
                     }
-
-                }
-
-                switch (Scene.Life())
-                {
-                    case 2: 
-                        pbHeart3.Visible = false; 
-                        break;
-                    case 1:
-                        pbHeart2.Visible = false;
-                        break;
-                    case 0:
-                        pbHeart1.Visible = false;
-                        break;
                 }
                 pnlScene.Invalidate();
+            }
+        }
+
+        private void UpdateMenu()
+        {
+            lblScore.Text = string.Format("Score : {0}", Scene.GetScore());
+            lblTime.Text = string.Format("{0:00}:{1:00}", (time / 24) / 60, (time / 24) % 60);
+            switch (Scene.Life())
+            {
+                case 3:
+                    pbHeart3.Visible = pbHeart1.Visible = pbHeart2.Visible = true;
+                    break;
+                case 2:
+                    pbHeart3.Visible = false;
+                    break;
+                case 1:
+                    pbHeart2.Visible = false;
+                    break;
+                case 0:
+                    pbHeart1.Visible = false;
+                    break;
             }
         }
 
@@ -92,7 +98,7 @@ namespace StarWarsVP
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            if (Sprites.DoneLoading)
+            if (SpriteList.DoneLoading)
             {
                 btnRestart.Visible = true;
                 pnlScene.Visible = true;
@@ -104,13 +110,18 @@ namespace StarWarsVP
         private void btnHighScores_Click(object sender, EventArgs e)
         {
             ToggleViews();
-            pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = false;
-            lblScore.Text = "";
-            lblTime.Text = "";
+            BlankMenu();
             btnRestart.Visible = false;
             pnlHighScores.Visible = true;
             lblScores.Text = Serializer.GetString();
             lblScores.Visible = true;
+        }
+
+        private void BlankMenu()
+        {
+            pbHeart1.Visible = pbHeart2.Visible = pbHeart3.Visible = false;
+            lblScore.Text = "";
+            lblTime.Text = "";
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -121,7 +132,6 @@ namespace StarWarsVP
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            //TODO SAVE SCORE
             if (Theme != null)
             {
                 Theme.Stop();

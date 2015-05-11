@@ -10,39 +10,55 @@ namespace StarWarsVP
     public abstract class Shape
     {
 
-        private readonly int VELOCITY = 20;
-        public static int DEFAULT_RADIUS = 200;
-        protected int Radius;
-        public Point Position { get; set; }
-        public int VelocityX { get; set; }
-        public int VelocityY { get; set; }
+        public static int DEFAULT_RADIUS;
+        private readonly int VELOCITY;
+        protected int Radius { get; set;}
+        protected Point Position { get; set; }
+        protected int VelocityX { get; set; }
+        protected int VelocityY { get; set; }
+        protected int TTD { get; set; }
         public bool Hit { get; set; }
         public bool Dead { get; set; }
-        protected int timeToDie;
 
         public Shape(Point position)
         {
-            Position = position;
-            VelocityX = VELOCITY;
-            VelocityY = VELOCITY;
+            VelocityX = DEFAULT_RADIUS;
+            VelocityY = DEFAULT_RADIUS;
             Radius = DEFAULT_RADIUS;
-            timeToDie = 0;
+            Position = new Point(position.X,position.Y);
+            TTD = 0;
             Hit = false;
             Dead = false;
         }
 
-        public abstract void Move(Direction direction);
+        public abstract void Move(Direction direction,Rectangle Bounds);
 
         public abstract void Draw(Graphics g);
 
         public bool IsHit(Shape s)
         {
-            int xx = (Position.X + Radius - s.Position.X + s.Radius) * (Position.X + Radius - s.Position.X + s.Radius);
-            int yy = (Position.Y + Radius - s.Position.Y + s.Radius) * (Position.Y + Radius - s.Position.Y + s.Radius);
-            return xx + yy <= Radius * Radius + Radius*1.5;
+            int xx = (Position.X - s.Position.X) * (Position.X - s.Position.X);
+            int yy = (s.Position.Y - Position.Y) * (s.Position.Y - Position.Y);
+            return xx + yy <= (Radius+s.Radius) * (Radius+s.Radius);
         }
 
+        public bool OutOfBounds(Rectangle Bounds)
+        {
+            bool Status = false;
 
+            if (Position.Y <= Bounds.Top-Radius*4 || Position.Y >= Bounds.Bottom)
+            {
+                Status = true;
+            }
+
+            //if (Position.X >= Bounds.Right + DEFAULT_RADIUS || Position.Y <= Bounds.Left - DEFAULT_RADIUS)
+            //{
+            //    Status = true;
+            //}
+
+            return Status;
+
+        }
 
     }
 }

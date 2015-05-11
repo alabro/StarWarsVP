@@ -11,24 +11,10 @@ namespace StarWarsVP
         RED,GREEN
     }
 
-    public enum EnemyType
-    {
-        ONE,TWO,THREE
-    }
-
-    public enum BulletDirection
-    {
-        UP,DOWN
-    }
-
     public enum Direction
     {
         UP,DOWN,LEFT,RIGHT,DEFAULT
     }
 
-    public enum ShapeType
-    {
-        BULLET,ENEMY
-    }
 
 }
